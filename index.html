@@ -1,298 +1,2005 @@
-
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vesira | Bienvenido</title>
+
+  <title>Vesira</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&family=Material+Symbols+Outlined" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
 
-    body {
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-      background: #0c0c0c;
-      color: #fff;
-      font-family: "Outfit", sans-serif;
-    }
+:root{
 
-    .acceso {
-      width: 100%;
-      max-width: 470px;
-      padding: 38px;
-      border: 1px solid #292929;
-      border-radius: 24px;
-      background: #141414;
-    }
+  --fondo:#0c0c0c;
 
-    .acceso__logo {
-      display: block;
-      width: 170px;
-      max-width: 75%;
-      max-height: 75px;
-      object-fit: contain;
-      object-position: left center;
-      margin-bottom: 30px;
-    }
+  --texto:#fff;
 
-    .acceso__linea {
-      height: 1px;
-      margin-bottom: 28px;
-      background: #303030;
-    }
+  --borde:#262626;
 
-    .acceso__eyebrow {
-      margin-bottom: 12px;
-      color: #888;
-      font-size: 10px;
-      letter-spacing: .25em;
-    }
+  --caja:#151515;
 
-    h1 {
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-size: clamp(42px, 9vw, 58px);
-      line-height: .95;
-      letter-spacing: -.06em;
-    }
+  --suave:#8d8d8d;
 
-    .acceso__descripcion {
-      margin-top: 16px;
-      color: #aaa;
-      font-size: 13px;
-      line-height: 1.6;
-    }
+}
 
-    fieldset {
-      margin-top: 27px;
-      border: 0;
-    }
+*{margin:0;padding:0;box-sizing:border-box}
 
-    legend {
-      margin-bottom: 12px;
-      font-size: 14px;
-      font-weight: 500;
-    }
+html{scroll-behavior:smooth}
 
-    .opciones {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+body{
 
-    .opcion {
-      position: relative;
-      cursor: pointer;
-    }
+background:var(--fondo);
 
-    .opcion input {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      opacity: 0;
-    }
+color:var(--texto);
 
-    .opcion span {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 10px;
-      border: 1px solid #333;
-      border-radius: 12px;
-      background: #1b1b1b;
-      color: #ccc;
-      font-size: 12px;
-      text-align: center;
-      transition: .2s ease;
-    }
+font-family:"Outfit",Arial,sans-serif;
 
-    .opcion input:checked + span {
-      border-color: #fff;
-      background: #fff;
-      color: #111;
-    }
+overflow-x:hidden;
 
-    .opcion input:focus-visible + span {
-      outline: 2px solid #aaa;
-      outline-offset: 3px;
-    }
+}
 
-    .acceso__error {
-      margin-top: 18px;
-      color: #ffaaa5;
-      font-size: 12px;
-    }
+html,
 
-    .acceso__error:empty {
-      display: none;
-    }
+body {
 
-    .acceso__boton {
-      width: 100%;
-      min-height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 24px;
-      padding: 0 18px;
-      border: 0;
-      border-radius: 12px;
-      background: #fff;
-      color: #111;
-      font: inherit;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background .2s ease;
-    }
+min-height: 100%;
 
-    .acceso__boton:hover {
-      background: #ddd;
-    }
+margin: 0;
 
-    .acceso__nota {
-      margin-top: 16px;
-      color: #777;
-      font-size: 10px;
-      line-height: 1.5;
-      text-align: center;
-    }
+}
 
-    @media (max-width: 480px) {
-      .acceso {
-        padding: 26px 21px;
-        border-radius: 20px;
-      }
-    }
+body {
+
+min-height: 100vh;
+
+min-height: 100dvh;
+
+display: flex;
+
+flex-direction: column;
+
+}
+
+main {
+
+flex: 1 0 auto;
+
+display: flex;
+
+flex-direction: column;
+
+}
+
+.productos {
+
+flex: 1 0 auto;
+
+}
+
+.marquee-vesira {
+
+margin-top: auto;
+
+flex-shrink: 0;
+
+}
+
+footer {
+
+margin-top: auto;
+
+flex-shrink: 0;
+
+}
+
+button{font:inherit}
+
+/* INTRO / BANNER DE MARCA */
+
+.intro{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:74px;
+
+z-index:10000;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:0 24px;
+
+background:rgba(10,10,10,.92);
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+-webkit-backdrop-filter:blur(18px);
+
+opacity:1;
+
+visibility:visible;
+
+pointer-events:auto;
+
+transition:opacity .55s cubic-bezier(.2,.8,.2,1),visibility .55s ease;
+
+}
+
+.intro.hide{opacity:0;visibility:hidden;pointer-events:none}
+
+.eslogan{
+
+width:min(450px,82vw);
+
+max-height:100px;
+
+height:auto;
+
+object-fit:contain;
+
+display:block;
+
+transform:translateY(10px);
+
+opacity:0;
+
+animation:introSloganIn .8s cubic-bezier(.16,.78,.22,1) .08s forwards;
+
+}
+
+@keyframes introSloganIn{
+
+  from{opacity:0;transform:translateY(10px)}
+
+  to{opacity:1;transform:translateY(0)}
+
+}
+
+/* La navbar se inyecta desde vesira-navbar.js */
+
+.vesira-global-nav{opacity:0;transform:translateY(-10px);transition:opacity .55s ease,transform .55s ease}
+
+.vesira-global-nav.vesira-intro-ready{opacity:1;transform:translateY(0)}
+
+@keyframes cartCountBump{
+
+  0%{transform:scale(1)}
+
+  35%{transform:scale(1.32)}
+
+  65%{transform:scale(.94)}
+
+  100%{transform:scale(1)}
+
+}
+
+.producto-info{padding:15px 3px 4px}
+
+.producto-row{
+
+display:grid;
+
+grid-template-columns:minmax(0,1fr) auto;
+
+align-items:center;
+
+gap:12px;
+
+width:100%;
+
+}
+
+.producto-texto{min-width:0}
+
+.producto-nombre{
+
+display:block;
+
+min-width:0;
+
+font-family:"Bricolage Grotesque",sans-serif;
+
+font-size:21px;
+
+font-weight:500;
+
+line-height:1;
+
+letter-spacing:-.028em;
+
+white-space:nowrap;
+
+overflow:hidden;
+
+text-overflow:ellipsis;
+
+text-shadow:0 1px 18px rgba(255,255,255,.05);
+
+}
+
+.producto-card:hover .producto-nombre{letter-spacing:-.018em}
+
+.producto-precio{
+
+justify-self:end;
+
+margin-left:8px;
+
+padding:0;
+
+border:0;
+
+border-radius:0;
+
+background:transparent;
+
+font-size:14px;
+
+font-weight:600;
+
+line-height:1;
+
+white-space:nowrap;
+
+letter-spacing:.01em;
+
+}
+
+.producto-anadir{
+
+position:absolute;
+
+top:20px;
+
+right:20px;
+
+z-index:3;
+
+width:40px;
+
+height:40px;
+
+padding:0;
+
+border:1px solid rgba(255,255,255,.16);
+
+border-radius:50%;
+
+background:#fff;
+
+color:#0c0c0c;
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+cursor:pointer;
+
+box-shadow:0 6px 18px rgba(0,0,0,.20);
+
+transition:transform .24s cubic-bezier(.16,.78,.22,1),background .22s ease,box-shadow .22s ease;
+
+}
+
+.producto-anadir:hover{
+
+transform:translateY(-2px) scale(1.07);
+
+background:#f2f2ef;
+
+box-shadow:0 10px 24px rgba(0,0,0,.28);
+
+}
+
+.producto-anadir:active{transform:scale(.93)}
+
+.producto-anadir .material-symbols-outlined{
+
+font-size:20px;
+
+line-height:1;
+
+font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;
+
+}
+
+.producto-descripcion{margin-top:6px;max-width:300px;color:var(--suave);font-size:10px;line-height:1.5}
+
+@media(max-width:700px){
+
+.producto-row{gap:7px}
+
+.producto-nombre{font-size:17px}
+
+.producto-precio{font-size:10px;padding:0;margin-left:2px}
+
+.producto-anadir{width:34px;height:34px;top:14px;right:14px}
+
+.producto-anadir .material-symbols-outlined{font-size:18px}
+
+.producto-descripcion{font-size:8.5px;margin-top:4px}
+
+}
+
+/* HERO */
+
+.imagen-principal{
+
+position:relative;
+
+width:100%;
+
+margin-top:0;
+
+height:min(680px,56vw);
+
+min-height:440px;
+
+overflow:hidden;
+
+background:var(--fondo);
+
+}
+
+.imagen-principal img{
+
+width:100%;
+
+height:100%;
+
+display:block;
+
+object-fit:cover;
+
+object-position:center top;
+
+}
+
+.imagen-principal::before,
+
+.imagen-principal::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+width:100%;
+
+z-index:2;
+
+pointer-events:none;
+
+}
+
+.imagen-principal::before{
+
+top:0;
+
+height:120px;
+
+background:linear-gradient(to bottom,var(--fondo),rgba(12,12,12,.76),transparent);
+
+}
+
+.imagen-principal::after{
+
+bottom:0;
+
+height:150px;
+
+background:linear-gradient(to top,var(--fondo),rgba(12,12,12,.78),transparent);
+
+}
+
+/* PRODUCTOS */
+
+.productos{
+
+padding:110px 5vw 110px;
+
+}
+
+.productos-cabecera{
+
+margin-bottom:24px;
+
+}
+
+.productos-cabecera h2 {
+
+font-family:
+
+                "Impact",
+
+                "Arial Black",
+
+                "Bricolage Grotesque",
+
+sans-serif;
+
+font-size:
+
+clamp(46px, 5.4vw, 76px);
+
+font-weight:
+
+                900;
+
+line-height:
+
+                .82;
+
+letter-spacing:
+
+                -.055em;
+
+transform:
+
+skewX(-8deg);
+
+transform-origin:
+
+left center;
+
+}
+
+.productos-eyebrow{
+
+margin-bottom:14px;
+
+color:var(--suave);
+
+font-size:10px;
+
+font-weight:500;
+
+letter-spacing:.34em;
+
+line-height:1;
+
+}
+
+.productos-cabecera h2{
+
+white-space:nowrap;
+
+letter-spacing:-.045em;
+
+word-spacing:.025em;
+
+margin-top:10px;
+
+}
+
+.grid-productos{
+
+display:grid;
+
+grid-template-columns:repeat(3,minmax(0,1fr));
+
+gap:20px;
+
+}
+
+.producto-card{
+
+position:relative;
+
+display:block;
+
+color:var(--texto);
+
+text-decoration:none;
+
+background:var(--caja);
+
+border:1px solid rgba(255,255,255,.07);
+
+border-radius:22px;
+
+padding:12px;
+
+transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+
+}
+
+.producto-card:hover{
+
+transform:translateY(-4px);
+
+border-color:rgba(255,255,255,.15);
+
+box-shadow:0 18px 45px rgba(0,0,0,.25);
+
+}
+
+.producto-imagen{
+
+position:relative;
+
+width:100%;
+
+aspect-ratio:1/.86;
+
+overflow:hidden;
+
+border-radius:16px;
+
+background:#f2f2ef;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.producto-imagen img{
+
+width:86%;
+
+height:86%;
+
+object-fit:contain;
+
+display:block;
+
+transition:transform .5s cubic-bezier(.2,.8,.2,1);
+
+}
+
+.producto-card:hover .producto-imagen img{transform:scale(1.05)}
+
+.productos-mensaje{
+
+grid-column:1/-1;
+
+padding:70px 20px;
+
+text-align:center;
+
+color:#999;
+
+}
+
+/* MARQUEE */
+
+.marquee-vesira{
+
+width:100%;
+
+overflow:hidden;
+
+background:transparent;
+
+padding:34px 0;
+
+border-top:1px solid var(--borde);
+
+}
+
+.marquee-vesira-track{
+
+display:flex;
+
+width:max-content;
+
+animation:vesiraLoop 18s linear infinite;
+
+}
+
+.marquee-vesira-group{
+
+display:flex;
+
+align-items:center;
+
+gap:70px;
+
+padding-right:70px;
+
+flex-shrink:0;
+
+}
+
+.marquee-vesira-group img{
+
+width:155px;
+
+height:60px;
+
+object-fit:contain;
+
+display:block;
+
+flex-shrink:0;
+
+}
+
+@keyframes vesiraLoop{
+
+  from{transform:translateX(0)}
+
+  to{transform:translateX(-50%)}
+
+}
+
+/* TOAST */
+
+.toast{
+
+position:fixed;
+
+left:50%;
+
+bottom:24px;
+
+z-index:3000;
+
+transform:translate(-50%,20px);
+
+opacity:0;
+
+padding:12px 17px;
+
+border:1px solid var(--borde);
+
+border-radius:999px;
+
+background:rgba(20,20,20,.95);
+
+backdrop-filter:blur(12px);
+
+font-size:11px;
+
+pointer-events:none;
+
+transition:opacity .25s ease,transform .25s ease;
+
+}
+
+.toast.visible{
+
+opacity:1;
+
+transform:translate(-50%,0);
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+.grid-productos{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+}
+
+@media(max-width:700px){
+
+.intro{height:70px}
+
+.eslogan{width:min(450px,85vw);max-height:450px}
+
+.imagen-principal{
+
+margin-top:70px;
+
+height:430px;
+
+min-height:430px;
+
+  }
+
+.imagen-principal img{
+
+height:100%;
+
+object-fit:cover;
+
+object-position:center top;
+
+  }
+
+.imagen-principal::before{height:90px}
+
+.imagen-principal::after{height:120px}
+
+.productos{
+
+padding:90px 14px 80px;
+
+  }
+
+.productos-cabecera{margin-bottom:18px; margin-left:6.5px}
+
+.productos-cabecera h2{font-size:36px;letter-spacing:-.055em}
+
+.grid-productos{gap:10px}
+
+.producto-card{
+
+padding:8px;
+
+border-radius:17px;
+
+  }
+
+.producto-imagen{border-radius:12px;aspect-ratio:1/.9}
+
+.producto-imagen img{width:84%;height:84%}
+
+.producto-info{padding:11px 2px 3px}
+
+.producto-nombre{font-size:15px}
+
+.producto-descripcion{font-size:8.5px;margin-top:4px}
+
+.producto-precio{font-size:12px}
+
+.marquee-vesira{padding:24px 0}
+
+.marquee-vesira-group{gap:45px;padding-right:45px}
+
+.marquee-vesira-group img{width:115px;height:48px}
+
+}
+
+.home-cart-fly{will-change:transform,opacity;position:fixed;z-index:12000;pointer-events:none;object-fit:contain;transform-origin:center;filter:drop-shadow(0 18px 24px rgba(0,0,0,.38))}
+
+/* PORTADA SIMPLE VESIRA */
+
+.vesira-hero {
+
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+align-items: center;
+
+gap: 25px;
+
+width: calc(100% - 40px);
+
+max-width: 1800px;
+
+margin: 120px auto 0;
+
+padding: 30px;
+
+background: #151515;
+
+border: 1px solid rgba(255,255,255,.07);
+
+border-radius: 24px;
+
+overflow: hidden;
+
+}
+
+.vesira-hero__texto {
+
+padding-left: 15px;
+
+}
+
+.vesira-hero__texto > span {
+
+display: block;
+
+margin-bottom: 12px;
+
+color: #858585;
+
+font-size: 10px;
+
+letter-spacing: .3em;
+
+}
+
+.vesira-hero__texto h1 {
+
+font-family: "Bricolage Grotesque", sans-serif;
+
+font-size: clamp(58px, 9vw, 130px);
+
+font-weight: 800;
+
+letter-spacing: -.09em;
+
+line-height: .9;
+
+}
+
+.vesira-hero__texto h1 span {
+
+color: #777;
+
+}
+
+.vesira-hero__imagen {
+
+height: clamp(220px, 32vw, 420px);
+
+overflow: hidden;
+
+border-radius: 16px;
+
+background: #202020;
+
+}
+
+.vesira-hero__imagen img {
+
+display: block;
+
+width: 100%;
+
+height: 100%;
+
+object-fit: cover;
+
+object-position: center;
+
+}
+
+/* MÓVIL */
+
+@media (max-width: 700px) {
+
+.vesira-hero {
+
+width: calc(100% - 24px);
+
+grid-template-columns: 1fr 1fr;
+
+gap: 12px;
+
+margin-top: 110px;
+
+padding: 15px;
+
+border-radius: 18px;
+
+  }
+
+.vesira-hero__texto {
+
+padding-left: 2px;
+
+  }
+
+.vesira-hero__texto > span {
+
+font-size: 8px;
+
+letter-spacing: .18em;
+
+  }
+
+.vesira-hero__texto h1 {
+
+font-size: clamp(38px, 10vw, 65px);
+
+  }
+
+.vesira-hero__imagen {
+
+height: 180px;
+
+border-radius: 12px;
+
+  }
+
+}
+
+.productos {
+
+padding-top: 60px;
+
+}
+
+@media (max-width: 700px) {
+
+.productos {
+
+padding-top: 40px;
+
+  }
+
+}
+
+/* POPUP DE ACCESO VESIRA */
+
+.vesira-gate-modal[hidden] {
+
+display: none !important;
+
+}
+
+.vesira-gate-modal {
+
+position: fixed;
+
+inset: 0;
+
+z-index: 200000;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+padding: 18px;
+
+overflow-y: auto;
+
+background: rgba(0, 0, 0, .14);
+
+-webkit-backdrop-filter: blur(2px);
+
+backdrop-filter: blur(2px);
+
+overscroll-behavior: contain;
+
+}
+
+.vesira-gate-modal__card {
+
+width: 100%;
+
+max-width: 440px;
+
+margin: auto;
+
+padding: 32px;
+
+border: 1px solid rgba(255, 255, 255, .12);
+
+border-radius: 22px;
+
+background: #111;
+
+color: #fff;
+
+box-shadow: 0 30px 100px rgba(0, 0, 0, .5);
+
+animation: vesiraGateIn .3s ease both;
+
+}
+
+@keyframes vesiraGateIn {
+
+  from {
+
+opacity: 0;
+
+transform: translateY(12px) scale(.98);
+
+  }
+
+  to {
+
+opacity: 1;
+
+transform: translateY(0) scale(1);
+
+  }
+
+}
+
+.vesira-gate-modal__logo {
+
+display: block;
+
+width: 155px;
+
+max-width: 75%;
+
+max-height: 60px;
+
+object-fit: contain;
+
+object-position: left center;
+
+}
+
+.vesira-gate-modal__line {
+
+height: 1px;
+
+margin: 24px 0;
+
+background: #303030;
+
+}
+
+.vesira-gate-modal__eyebrow {
+
+margin-bottom: 12px;
+
+color: #8d8d8d;
+
+font-size: 9px;
+
+letter-spacing: .25em;
+
+}
+
+.vesira-gate-modal__card h2 {
+
+font-family: "Bricolage Grotesque", sans-serif;
+
+font-size: clamp(38px, 8vw, 52px);
+
+line-height: .95;
+
+letter-spacing: -.06em;
+
+}
+
+.vesira-gate-modal__description {
+
+margin-top: 12px;
+
+color: #aaa;
+
+font-size: 12px;
+
+line-height: 1.6;
+
+}
+
+.vesira-gate-modal fieldset {
+
+min-width: 0;
+
+margin-top: 24px;
+
+border: 0;
+
+}
+
+.vesira-gate-modal legend {
+
+margin-bottom: 11px;
+
+font-size: 13px;
+
+font-weight: 500;
+
+}
+
+.vesira-gate-modal__options {
+
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+gap: 9px;
+
+}
+
+.vesira-gate-modal__option {
+
+position: relative;
+
+cursor: pointer;
+
+}
+
+.vesira-gate-modal__option input {
+
+position: absolute;
+
+width: 1px;
+
+height: 1px;
+
+opacity: 0;
+
+}
+
+.vesira-gate-modal__option span {
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+min-height: 45px;
+
+padding: 10px;
+
+border: 1px solid #333;
+
+border-radius: 11px;
+
+background: #191919;
+
+color: #ccc;
+
+font-size: 11px;
+
+text-align: center;
+
+transition: background .2s ease, color .2s ease,
+
+              border-color .2s ease;
+
+}
+
+.vesira-gate-modal__option input:checked + span {
+
+border-color: #fff;
+
+background: #fff;
+
+color: #111;
+
+}
+
+.vesira-gate-modal__option input:focus-visible + span {
+
+outline: 2px solid #aaa;
+
+outline-offset: 3px;
+
+}
+
+.vesira-gate-modal__error {
+
+margin-top: 15px;
+
+color: #ffaaa5;
+
+font-size: 12px;
+
+line-height: 1.5;
+
+}
+
+.vesira-gate-modal__error:empty {
+
+display: none;
+
+}
+
+.vesira-gate-modal__submit {
+
+display: flex;
+
+justify-content: space-between;
+
+align-items: center;
+
+width: 100%;
+
+min-height: 48px;
+
+margin-top: 21px;
+
+padding: 0 16px;
+
+border: 0;
+
+border-radius: 11px;
+
+background: #fff;
+
+color: #111;
+
+font: inherit;
+
+font-size: 12px;
+
+font-weight: 600;
+
+cursor: pointer;
+
+transition: background .2s ease;
+
+}
+
+.vesira-gate-modal__submit:hover {
+
+background: #ddd;
+
+}
+
+.vesira-gate-modal__note {
+
+margin-top: 14px;
+
+color: #777;
+
+font-size: 10px;
+
+text-align: center;
+
+}
+
+@media (max-width: 480px) {
+
+.vesira-gate-modal {
+
+padding: 12px;
+
+  }
+
+.vesira-gate-modal__card {
+
+padding: 25px 21px;
+
+border-radius: 19px;
+
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+.vesira-gate-modal__card {
+
+animation: none;
+
+  }
+
+}
+
+
+
   </style>
+
 </head>
 
 <body>
 
-  <main class="acceso">
+  <div class="intro" id="intro">
 
-    <img
-      class="acceso__logo"
-      src="img/logo2.png"
-      alt="Vesira"
-    >
+    <img src="img/eslogan.png" alt="Vesira" class="eslogan">
 
-    <div class="acceso__linea"></div>
+  </div>
 
-    <p class="acceso__eyebrow">ANTES DE CONTINUAR</p>
+  <main>
 
-    <h1>Un momento.</h1>
+<!-- PORTADA VESIRA -->
 
-    <p class="acceso__descripcion">
-      Confirma estas dos condiciones para continuar.
+<section class="vesira-hero">
+
+  <div class="vesira-hero__texto">
+
+    <h1>Fácil y al mejor precio<span>.</span></h1>
+
+  </div>
+
+  <div class="vesira-hero__imagen">
+
+    <img src="img/vesira-portada.png"
+
+alt="Vaper Vesira">
+
+  </div>
+
+</section>
+
+<!-- FIN PORTADA PRINCIPAL -->
+
+    <section class="productos">
+
+      <div class="productos-cabecera">
+
+          <div class="productos-titulo">
+
+            <h2>Elige tu mood</h2>
+
+          </div>
+
+        </div>
+
+      <div class="grid-productos" id="gridProductos">
+
+        <div class="productos-mensaje">Cargando productos...</div>
+
+      </div>
+
+    </section>
+
+    <section class="marquee-vesira">
+
+      <div class="marquee-vesira-track">
+
+        <div class="marquee-vesira-group">
+
+          <img src="img/logo2.png" alt="Vesira">
+
+          <img src="img/logo15.png" alt="">
+
+          <img src="img/logo2.png" alt="Vesira">
+
+          <img src="img/logo15.png" alt="">
+
+          <img src="img/logo2.png" alt="Vesira">
+
+          <img src="img/logo15.png" alt="">
+
+        </div>
+
+        <div class="marquee-vesira-group">
+
+          <img src="img/logo2.png" alt="Vesira">
+
+          <img src="img/logo15.png" alt="">
+
+          <img src="img/logo2.png" alt="Vesira">
+
+          <img src="img/logo15.png" alt="">
+
+          <img src="img/logo2.png" alt="Vesira">
+
+          <img src="img/logo15.png" alt="">
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+<!-- POPUP DE ACCESO VESIRA -->
+
+<div class="vesira-gate-modal"
+
+id="vesiraGateModal">
+
+  <div class="vesira-gate-modal__card"
+
+role="dialog"
+
+aria-modal="true"
+
+aria-labelledby="vesiraGateTitle">
+
+    <img src="img/logo2.png"
+
+alt="Vesira"
+
+class="vesira-gate-modal__logo">
+
+    <div class="vesira-gate-modal__line"></div>
+
+    <p class="vesira-gate-modal__eyebrow">
+
+      ANTES DE CONTINUAR
+
     </p>
 
-    <form id="formAcceso">
+    <h2 id="vesiraGateTitle">Un momento.</h2>
+
+    <p class="vesira-gate-modal__description">
+
+      Confirma estos dos datos para entrar.
+
+    </p>
+
+    <form id="vesiraGateForm">
 
       <fieldset>
+
         <legend>¿Eres de Canarias?</legend>
 
-        <div class="opciones">
-          <label class="opcion">
-            <input type="radio" name="canarias"
-                   value="si" required>
+        <div class="vesira-gate-modal__options">
+
+          <label class="vesira-gate-modal__option">
+
+            <input type="radio" name="canarias" value="si">
+
             <span>Sí, soy canario/a</span>
+
           </label>
 
-          <label class="opcion">
-            <input type="radio" name="canarias"
-                   value="no" required>
+          <label class="vesira-gate-modal__option">
+
+            <input type="radio" name="canarias" value="no">
+
             <span>No</span>
+
           </label>
+
         </div>
+
       </fieldset>
 
       <fieldset>
+
         <legend>¿Tienes 18 años o más?</legend>
 
-        <div class="opciones">
-          <label class="opcion">
-            <input type="radio" name="edad"
-                   value="si" required>
+        <div class="vesira-gate-modal__options">
+
+          <label class="vesira-gate-modal__option">
+
+            <input type="radio" name="edad" value="si">
+
             <span>Sí</span>
+
           </label>
 
-          <label class="opcion">
-            <input type="radio" name="edad"
-                   value="no" required>
+          <label class="vesira-gate-modal__option">
+
+            <input type="radio" name="edad" value="no">
+
             <span>No</span>
+
           </label>
+
         </div>
+
       </fieldset>
 
-      <p class="acceso__error"
-         id="errorAcceso"
-         role="alert"></p>
+      <p id="vesiraGateError"
 
-      <button class="acceso__boton" type="submit">
-        Continuar
+class="vesira-gate-modal__error"
+
+role="alert"></p>
+
+      <button type="submit"
+
+class="vesira-gate-modal__submit">
+
+        Entrar en Vesira
+
         <span aria-hidden="true">↗</span>
+
       </button>
 
-      <p class="acceso__nota">
-        Debes cumplir ambas condiciones para continuar.
+      <p class="vesira-gate-modal__note">
+
+        El detector no tiene botón de excepción.
+
       </p>
 
     </form>
-  </main>
+
+  </div>
+
+</div>
+
+<!-- FIN POPUP -->
+
+  <div class="toast" id="toast">Menú</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="supabase.js"></script>
 
   <script>
-    const form = document.getElementById("formAcceso");
-    const error = document.getElementById("errorAcceso");
 
-    form.addEventListener("change", () => {
-      error.textContent = "";
-    });
+    const intro = document.getElementById("intro");
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
+    const navbar = document.querySelector(".vesira-global-nav");
 
-      const canarias =
-        form.querySelector('[name="canarias"]:checked')?.value;
+    const gridProductos = document.getElementById("gridProductos");
 
-      const edad =
-        form.querySelector('[name="edad"]:checked')?.value;
+    const toast = document.getElementById("toast");
 
-      if (!canarias || !edad) {
-        error.textContent =
-          "Responde a las dos preguntas para continuar.";
-        return;
+    function mostrarToast(mensaje){
+
+      toast.textContent = mensaje;
+
+      toast.classList.add("visible");
+
+clearTimeout(window._vesiraToast);
+
+window._vesiraToast = setTimeout(() => toast.classList.remove("visible"), 1600);
+
+    }
+
+    function getHomeCart(){
+
+      try{
+
+        const cart = JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
+
+        return Array.isArray(cart) ? cart : [];
+
+      }catch{
+
+        return [];
+
       }
 
-      // Si no tiene 18 años, irá a su propia página.
-      if (edad === "no") {
-        window.location.href = "menor-edad.html";
-        return;
+    }
+
+    function saveHomeCart(cart){
+
+localStorage.setItem("vesiraCarrito", JSON.stringify(cart));
+
+window.dispatchEvent(new CustomEvent("vesiraCartUpdated",{detail:{bump:true}}));
+
+    }
+
+    function animateHomeProductToCart(productImage){
+
+      const origen = productImage;
+
+      const destino =
+
+document.getElementById("abrirCarrito") ||
+
+document.getElementById("vesiraGlobalCart") ||
+
+document.querySelector('.nav-cart-button, [aria-label="Carrito"]');
+
+      if(!origen || !destino) return;
+
+      const start = origen.getBoundingClientRect();
+
+      const end = destino.getBoundingClientRect();
+
+      if(!start.width || !start.height || !end.width || !end.height) return;
+
+      const clon = origen.cloneNode(true);
+
+      clon.className = "home-cart-fly";
+
+      clon.removeAttribute("id");
+
+      clon.setAttribute("aria-hidden", "true");
+
+      const startSize = Math.min(Math.max(start.width * 0.34, 92), 175);
+
+      clon.style.width = startSize + "px";
+
+      clon.style.height = startSize + "px";
+
+      clon.style.left = (start.left + start.width / 2 - startSize / 2) + "px";
+
+      clon.style.top = (start.top + start.height / 2 - startSize / 2) + "px";
+
+      clon.style.opacity = "1";
+
+      clon.style.visibility = "visible";
+
+      clon.style.transform = "translate3d(0,0,0) scale(1) rotate(0deg)";
+
+document.body.appendChild(clon);
+
+      void clon.offsetWidth;
+
+      const startX = start.left + start.width / 2;
+
+      const startY = start.top + start.height / 2;
+
+      const endX = end.left + end.width / 2;
+
+      const endY = end.top + end.height / 2;
+
+      const targetX = endX - startX;
+
+      const targetY = endY - startY;
+
+      const lift = Math.min(-145, targetY * 0.35 - 90);
+
+      const animation = clon.animate([
+
+        {
+
+          transform:"translate3d(0,0,0) scale(1) rotate(0deg)",
+
+          opacity:1,
+
+          offset:0
+
+        },
+
+        {
+
+          transform:`translate3d(${targetX * .26}px, ${targetY * .12 + lift}px, 0) scale(.90) rotate(-8deg)`,
+
+          opacity:1,
+
+          offset:.24
+
+        },
+
+        {
+
+          transform:`translate3d(${targetX * .62}px, ${targetY * .38 + lift * .70}px, 0) scale(.66) rotate(7deg)`,
+
+          opacity:1,
+
+          offset:.56
+
+        },
+
+        {
+
+          transform:`translate3d(${targetX * .88}px, ${targetY * .74}px, 0) scale(.36) rotate(-5deg)`,
+
+          opacity:.96,
+
+          offset:.82
+
+        },
+
+        {
+
+          transform:`translate3d(${targetX}px, ${targetY}px, 0) scale(.08) rotate(12deg)`,
+
+          opacity:0,
+
+          offset:1
+
+        }
+
+      ],{
+
+        duration:1320,
+
+        easing:"cubic-bezier(.16,.78,.22,1)",
+
+        fill:"forwards"
+
+      });
+
+      destino.animate([
+
+        {transform:"scale(1)"},
+
+        {transform:"scale(1.05)",offset:.5},
+
+        {transform:"scale(1)"}
+
+      ],{duration:1320,easing:"ease-out"});
+
+      animation.onfinish = () => {
+
+        clon.remove();
+
+        destino.animate([
+
+          {transform:"scale(1)"},
+
+          {transform:"scale(1.16)"},
+
+          {transform:"scale(1)"}
+
+        ],{duration:380,easing:"ease-out"});
+
+        const icon = destino.querySelector(".material-symbols-outlined, svg");
+
+        if(icon){
+
+          icon.animate([
+
+            {transform:"scale(1)"},
+
+            {transform:"scale(1.22)"},
+
+            {transform:"scale(1)"}
+
+          ],{duration:320,easing:"ease-out"});
+
+        }
+
+      };
+
+      animation.oncancel = () => clon.remove();
+
+    }
+
+    function addHomeProductToCart(product,imageElement){
+
+      const cart=getHomeCart();
+
+      const existing=cart.find(item=>String(item.id)===String(product.id));
+
+      if(existing) existing.cantidad=Number(existing.cantidad||0)+1;
+
+      else cart.push({
+
+        id:product.id,
+
+        nombre:product.nombre,
+
+        precio:Number(product.precio),
+
+        imagen:product.imagen_url,
+
+        cantidad:1
+
+      });
+
+      saveHomeCart(cart);
+
+      animateHomeProductToCart(imageElement);
+
+    }
+
+// La presentación ocupa solo la altura de la navbar.
+
+// Después se retira y hacemos entrar la navbar global.
+
+document.body.style.overflow = "hidden";
+
+setTimeout(()=>{
+
+      intro.classList.add("hide");
+
+document.body.style.overflow = document.getElementById("vesiraGateModal") &&
+  !document.getElementById("vesiraGateModal").hidden ? "hidden" : "";
+
+// La navbar se crea por vesira-navbar.js en DOMContentLoaded,
+
+// así que la buscamos aquí y no antes.
+
+      const globalNavbar = document.querySelector(".vesira-global-nav");
+
+      if(globalNavbar){
+
+        globalNavbar.classList.add("vesira-intro-ready");
+
+      }else{
+
+// Fallback por si el script de la navbar tarda en cargar.
+
+        const showNavbar = () => {
+
+          const nav = document.querySelector(".vesira-global-nav");
+
+          if(nav) nav.classList.add("vesira-intro-ready");
+
+        };
+
+window.setTimeout(showNavbar, 100);
+
+window.setTimeout(showNavbar, 500);
+
       }
 
-      // Si es mayor de edad pero no es de Canarias.
-      if (canarias === "no") {
-        window.location.href = "no-canarias.html";
-        return;
+setTimeout(()=>intro.remove(),700);
+
+    },900);
+
+    async function cargarProductos(){
+
+      try{
+
+        const { data, error } = await supabaseClient
+
+          .from("Productos")
+
+          .select(`
+
+            id,
+
+            nombre,
+
+            descripcion,
+
+            precio,
+
+            categoria,
+
+            activo,
+
+            created_at,
+
+            imagen_url
+
+          `)
+
+          .eq("activo", true)
+
+          .order("created_at", { ascending: true });
+
+        if(error) throw error;
+
+        if(!data || data.length === 0){
+
+          gridProductos.innerHTML = `
+
+            <div class="productos-mensaje">
+
+              No hay vapers disponibles.
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+        gridProductos.innerHTML = "";
+
+        data.forEach(producto => {
+
+          const tarjeta = document.createElement("a");
+
+          tarjeta.className = "producto-card";
+
+          tarjeta.href = `producto.html?id=${producto.id}`;
+
+          const precio = Number(producto.precio)
+
+            .toFixed(2)
+
+            .replace(".", ",");
+
+          tarjeta.innerHTML = `
+
+            <div class="producto-imagen">
+
+              <img
+
+                src="${producto.imagen_url || ""}"
+
+                alt="${producto.nombre}"
+
+                loading="lazy"
+
+              >
+
+              <button class="producto-anadir" type="button" aria-label="Añadir ${producto.nombre} al carrito" title="Añadir al carrito">
+
+                <span class="material-symbols-outlined" aria-hidden="true">add</span>
+
+              </button>
+
+            </div>
+
+            <div class="producto-info">
+
+              <div class="producto-row">
+
+                <h3 class="producto-nombre">${producto.nombre}</h3>
+
+                <span class="producto-precio">${precio} €</span>
+
+              </div>
+
+              ${
+
+producto.descripcion
+
+                  ? `<p class="producto-descripcion">${producto.descripcion}</p>`
+
+                : ""
+
+              }
+
+            </div>
+
+          `;
+
+          gridProductos.appendChild(tarjeta);
+
+          const addButton = tarjeta.querySelector(".producto-anadir");
+
+          const productImage = tarjeta.querySelector(".producto-imagen img");
+
+          addButton.addEventListener("click", (event) => {
+
+event.preventDefault();
+
+event.stopPropagation();
+
+            addHomeProductToCart(producto, productImage);
+
+          });
+
+        });
+
+      }catch(error){
+
+console.error("Error cargando productos:", error);
+
+        gridProductos.innerHTML = `
+
+          <div class="productos-mensaje">
+
+            No se han podido cargar los productos.
+
+          </div>
+
+        `;
+
       }
 
-      // Si cumple las dos condiciones.
-      window.location.href = "tienda.html";
-    });
+    }
+
+    cargarProductos();
+
   </script>
 
+  <script src="vesira-navbar.js"></script>
+
+<script>
+(() => {
+  const modal = document.getElementById("vesiraGateModal");
+  const form = document.getElementById("vesiraGateForm");
+  const error = document.getElementById("vesiraGateError");
+
+  if (!modal || !form || !error) {
+    console.error("No se encuentra el formulario de acceso de Vesira.");
+    return;
+  }
+
+  // El popup aparece en cada carga y bloquea el scroll de fondo.
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+
+  form.addEventListener("change", () => {
+    error.textContent = "";
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const canarias = form.querySelector(
+      'input[name="canarias"]:checked'
+    )?.value;
+
+    const edad = form.querySelector(
+      'input[name="edad"]:checked'
+    )?.value;
+
+    if (!canarias || !edad) {
+      error.textContent = "Responde a las dos preguntas, máquina.";
+      return;
+    }
+
+    const motivos = [];
+    if (edad !== "si") motivos.push("edad");
+    if (canarias !== "si") motivos.push("canarias");
+
+    // Si falla alguna condición, abrir la página que muestra el motivo.
+    if (motivos.length > 0) {
+      const destino = new URL(
+        "acceso-denegado.html",
+        window.location.href
+      );
+      destino.searchParams.set("motivo", motivos.join(","));
+      window.location.assign(destino.href);
+      return;
+    }
+
+    // Solo permite continuar si las dos respuestas son afirmativas.
+    modal.hidden = true;
+    document.body.style.overflow = "";
+  });
+})();
+</script>
+
 </body>
+
 </html>
