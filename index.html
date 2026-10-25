@@ -754,6 +754,105 @@ border-radius:17px;
 
 .home-cart-fly{will-change:transform,opacity;position:fixed;z-index:12000;pointer-events:none;object-fit:contain;transform-origin:center;filter:drop-shadow(0 18px 24px rgba(0,0,0,.38))}
 
+/* PORTADA SIMPLE VESIRA */
+
+.vesira-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 25px;
+
+  width: calc(100% - 40px);
+  max-width: 1800px;
+  margin: 120px auto 0;
+  padding: 30px;
+
+  background: #151515;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.vesira-hero__texto {
+  padding-left: 15px;
+}
+
+.vesira-hero__texto > span {
+  display: block;
+  margin-bottom: 12px;
+  color: #858585;
+  font-size: 10px;
+  letter-spacing: .3em;
+}
+
+.vesira-hero__texto h1 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(58px, 9vw, 130px);
+  font-weight: 800;
+  letter-spacing: -.09em;
+  line-height: .9;
+}
+
+.vesira-hero__texto h1 span {
+  color: #777;
+}
+
+.vesira-hero__imagen {
+  height: clamp(220px, 32vw, 420px);
+  overflow: hidden;
+  border-radius: 16px;
+  background: #202020;
+}
+
+.vesira-hero__imagen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* MÓVIL */
+
+@media (max-width: 700px) {
+  .vesira-hero {
+    width: calc(100% - 24px);
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 110px;
+    padding: 15px;
+    border-radius: 18px;
+  }
+
+  .vesira-hero__texto {
+    padding-left: 2px;
+  }
+
+  .vesira-hero__texto > span {
+    font-size: 8px;
+    letter-spacing: .18em;
+  }
+
+  .vesira-hero__texto h1 {
+    font-size: clamp(38px, 10vw, 65px);
+  }
+
+  .vesira-hero__imagen {
+    height: 180px;
+    border-radius: 12px;
+  }
+}
+
+.productos {
+  padding-top: 60px;
+}
+
+@media (max-width: 700px) {
+  .productos {
+    padding-top: 40px;
+  }
+}
+
   </style>
 
 </head>
@@ -768,6 +867,23 @@ border-radius:17px;
 
   <main>
 
+
+
+<!-- PORTADA VESIRA -->
+<section class="vesira-hero">
+
+  <div class="vesira-hero__texto">
+    <h1>Fácil y al mejor precio<span>.</span></h1>
+  </div>
+
+  <div class="vesira-hero__imagen">
+    <img src="img/vesira-portada.png"
+         alt="Vaper Vesira">
+  </div>
+
+</section>
+
+<!-- FIN PORTADA PRINCIPAL -->
 
     <section class="productos">
 
