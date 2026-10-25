@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Reservar · Vesira</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --f: #0a0a0a;
+      --t: #ffffff;
+      --s: #8c8c8c;
+      --b: rgba(255, 255, 255, .1);
+      --c: #101010;
+      --muted: #181818;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--f);
+      color: var(--t);
+      font-family: Outfit, Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button,
+    select {
+      cursor: pointer;
+    }
+
+    .wrap {
+      width: min(1100px, calc(100% - 28px));
+      margin: auto;
+      padding: 115px 0 80px;
+    }
+
+    /* CABECERA */
+
+    .head {
+      margin-bottom: 35px;
+    }
+
+    .eyebrow {
+      color: var(--s);
+      font-size: 9px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-bottom: 13px;
+    }
+
+    h1 {
+      font-family: Bricolage Grotesque, Arial, sans-serif;
+      font-size: clamp(48px, 7vw, 82px);
+      font-weight: 400;
+      letter-spacing: -.075em;
+      line-height: .9;
+      margin-bottom: 18px;
+    }
+
+    .head p {
+      max-width: 470px;
+      color: var(--s);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* DISTRIBUCIÓN */
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .form-card,
+    .summary {
+      min-width: 0;
+      background: var(--c);
+      border: 1px solid var(--b);
+      border-radius: 22px;
+    }
+
+    .form-card {
+      padding: 25px;
+    }
+
+    .summary {
+      padding: 20px;
+      position: sticky;
+      top: 90px;
+    }
+
+    .section-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 20px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--b);
+    }
+
+    .section-top h2,
+    .summary h2 {
+      font-family: Bricolage Grotesque, Arial, sans-serif;
+      font-size: 27px;
+      font-weight: 400;
+      letter-spacing: -.055em;
+    }
+
+    .section-top p {
+      color: var(--s);
+      font-size: 10px;
+      line-height: 1.7;
+      margin-top: 6px;
+    }
+
+    .step {
+      flex-shrink: 0;
+      color: var(--s);
+      font-size: 9px;
+      letter-spacing: .1em;
+      padding: 8px 10px;
+      border: 1px solid var(--b);
+      border-radius: 999px;
+    }
+
+    /* FORMULARIO */
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 19px 14px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 10px;
+      color: #dedede;
+    }
+
+    .field label .optional {
+      color: var(--s);
+      margin-left: 4px;
+    }
+
+    .field input,
+    .field select {
+      display: block;
+      width: 100%;
+      min-height: 49px;
+      border: 1px solid var(--b);
+      border-radius: 12px;
+      background: #0a0a0a;
+      color: #fff;
+      outline: none;
+      padding: 0 13px;
+      font-size: 11px;
+      transition: border-color .2s, background .2s;
+    }
+
+    .field input::placeholder {
+      color: #646464;
+    }
+
+    .field select {
+      color-scheme: dark;
+    }
+
+    .field select:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: rgba(255, 255, 255, .65);
+      background: #0e0e0e;
+    }
+
+    .field input:user-invalid {
+      border-color: rgba(255, 120, 120, .7);
+    }
+
+    .hint {
+      margin-top: 8px;
+      color: #777;
+      font-size: 9px;
+      line-height: 1.7;
+    }
+
+    /* PAGO EN MANO */
+
+    .payment-note {
+      display: flex;
+      gap: 13px;
+      align-items: flex-start;
+      margin-top: 25px;
+      padding: 16px;
+      border: 1px solid var(--b);
+      border-radius: 15px;
+      background: #151515;
+    }
+
+    .payment-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 37px;
+      height: 37px;
+      border-radius: 50%;
+      background: #242424;
+      color: #fff;
+    }
+
+    .payment-icon .material-symbols-outlined {
+      font-size: 19px;
+    }
+
+    .payment-note h3 {
+      font-size: 11px;
+      font-weight: 500;
+      margin: 1px 0 5px;
+    }
+
+    .payment-note p {
+      color: var(--s);
+      font-size: 10px;
+      line-height: 1.8;
+    }
+
+    .payment-note strong {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    /* PRIVACIDAD */
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 22px;
+      color: var(--s);
+      font-size: 10px;
+      line-height: 1.8;
+    }
+
+    .consent input {
+      flex-shrink: 0;
+      width: 14px;
+      height: 14px;
+      margin-top: 3px;
+      accent-color: #fff;
+      cursor: pointer;
+    }
+
+    .consent a {
+      color: #fff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* BOTÓN */
+
+    .submit-btn {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 22px;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 999px;
+      background: #fff;
+      color: #0a0a0a;
+      font-size: 11px;
+      font-weight: 500;
+      transition: background .2s, transform .2s, opacity .2s;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: #dedede;
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .submit-btn:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 4px;
+    }
+
+    .form-footnote {
+      margin-top: 13px;
+      color: #777;
+      font-size: 9px;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    /* RESUMEN */
+
+    .summary h2 {
+      margin-bottom: 8px;
+    }
+
+    .summary-intro {
+      color: var(--s);
+      font-size: 10px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .products {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .product {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+    }
+
+    .product-img {
+      width: 56px;
+      height: 56px;
+      background: #f2f2ef;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .product-img img {
+      width: 88%;
+      height: 88%;
+      object-fit: contain;
+    }
+
+    .product-info {
+      min-width: 0;
+    }
+
+    .product-info h3 {
+      color: #fff;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .product-info p {
+      color: var(--s);
+      font-size: 9px;
+      margin-top: 5px;
+    }
+
+    .product-price {
+      color: #fff;
+      font-size: 10px;
+      margin-top: 5px;
+    }
+
+    .empty-cart {
+      padding: 17px 0;
+      color: var(--s);
+      font-size: 10px;
+      line-height: 1.8;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      margin-top: 5px;
+      border-top: 1px solid var(--b);
+      color: var(--s);
+      font-size: 10px;
+    }
+
+    .summary-line strong {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .cash-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px;
+      background: #171717;
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+
+    .cash-label .material-symbols-outlined {
+      font-size: 17px;
+      color: #e0e0e0;
+    }
+
+    .cash-label span:last-child {
+      color: #ddd;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 17px;
+      color: var(--s);
+      font-size: 9px;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-align: center;
+    }
+
+    .back-link:hover {
+      color: #fff;
+    }
+
+    /* MENSAJES */
+
+    .feedback {
+      margin-top: 16px;
+      padding: 13px 14px;
+      border: 1px solid var(--b);
+      border-radius: 12px;
+      color: #dedede;
+      font-size: 10px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .feedback[hidden] {
+      display: none;
+    }
+
+    .feedback.error {
+      border-color: rgba(255, 130, 130, .4);
+    }
+
+    /* PIE */
+
+    .page-footer {
+      margin-top: 35px;
+      color: #686868;
+      font-size: 9px;
+      letter-spacing: .08em;
+      text-align: center;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 850px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        position: static;
+      }
+
+      .summary {
+        order: 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .wrap {
+        padding-top: 100px;
+      }
+
+      .head {
+        margin-bottom: 27px;
+      }
+
+      .form-card {
+        padding: 19px 15px;
+        border-radius: 19px;
+      }
+
+      .summary {
+        padding: 18px 16px;
+        border-radius: 19px;
+      }
+
+      .section-top h2,
+      .summary h2 {
+        font-size: 24px;
+      }
+
+      .fields {
+        grid-template-columns: 1fr;
+        gap: 17px;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .step {
+        font-size: 8px;
+        padding: 7px 8px;
+      }
+
+      .head p {
+        font-size: 11px;
+      }
+
+      .payment-note {
+        padding: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR DE VESIRA -->
+  <script src="vesira-navbar.js"></script>
+
+  <main class="wrap">
+
+    <!-- CABECERA -->
+
+    <header class="head">
+
+      <div class="eyebrow">
+        VESIRA · RESERVAS
+      </div>
+
+      <h1>Reserva tu<br>entrega.</h1>
+
+      <p>
+        Completa tus datos, elige la zona donde quieres recibir
+        tus gafas y selecciona uno de los horarios disponibles.
+      </p>
+
+    </header>
+
+
+    <div class="layout">
+
+      <!-- FORMULARIO -->
+
+      <section class="form-card">
+
+        <div class="section-top">
+
+          <div>
+            <h2>Tus datos</h2>
+
+            <p>
+              Necesitamos estos datos para gestionar tu reserva.
+            </p>
+          </div>
+
+          <div class="step">
+            PASO 01 / 01
+          </div>
+
+        </div>
+
+
+        <form id="reservationForm">
+
+          <div class="fields">
+
+            <!-- NOMBRE -->
+
+            <div class="field">
+
+              <label for="nombre">
+                Nombre
+              </label>
+
+              <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Tu nombre"
+                autocomplete="given-name"
+                maxlength="60"
+                required
+              >
+
+            </div>
+
+
+            <!-- APELLIDOS -->
+
+            <div class="field">
+
+              <label for="apellidos">
+                Apellidos
+              </label>
+
+              <input
+                type="text"
+                id="apellidos"
+                name="apellidos"
+                placeholder="Tus apellidos"
+                autocomplete="family-name"
+                maxlength="100"
+                required
+              >
+
+            </div>
+
+
+            <!-- DNI -->
+
+            <div class="field full">
+
+              <label for="dni">
+                DNI
+              </label>
+
+              <input
+                type="text"
+                id="dni"
+                name="dni"
+                placeholder="12345678Z"
+                maxlength="9"
+                minlength="9"
+                pattern="[0-9]{8}[A-Za-z]"
+                title="Introduce un DNI válido de 8 números y una letra."
+                autocomplete="off"
+                autocapitalize="characters"
+                spellcheck="false"
+                required
+              >
+
+              <p class="hint">
+                Introduce los ocho números y la letra de tu DNI.
+              </p>
+
+            </div>
+
+
+            <!-- ZONA -->
+
+            <div class="field full">
+
+              <label for="zona">
+                Zona de entrega
+              </label>
+
+              <select
+                id="zona"
+                name="zona"
+                required
+              >
+
+                <option value="" selected disabled>
+                  Selecciona dónde quieres recibirlo
+                </option>
+
+                <option value="centro">
+                  Zona Centro
+                </option>
+
+                <option value="norte">
+                  Zona Norte
+                </option>
+
+                <option value="sur">
+                  Zona Sur
+                </option>
+
+              </select>
+
+              <p class="hint">
+                Selecciona la zona donde acordaremos la entrega.
+              </p>
+
+            </div>
+
+
+            <!-- HORARIO -->
+
+            <div class="field full">
+
+              <label for="hora">
+                Hora disponible
+              </label>
+
+              <select
+                id="hora"
+                name="hora"
+                required
+                disabled
+              >
+
+                <option value="" selected>
+                  Primero selecciona una zona
+                </option>
+
+              </select>
+
+              <p class="hint" id="horarioHint">
+                Los horarios disponibles aparecerán al seleccionar
+                tu zona.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- PAGO EN MANO -->
+
+          <div class="payment-note">
+
+            <div class="payment-icon">
+              <span class="material-symbols-outlined">
+                payments
+              </span>
+            </div>
+
+            <div>
+
+              <h3>Pago en mano al recibir tu pedido</h3>
+
+              <p>
+                El pago se realizará <strong>en efectivo,
+                en mano, en el momento de la entrega</strong>.
+                No tienes que pagar ahora por internet.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- CONSENTIMIENTO -->
+
+          <label class="consent" for="consentimiento">
+
+            <input
+              type="checkbox"
+              id="consentimiento"
+              name="consentimiento"
+              required
+            >
+
+            <span>
+              Acepto que Vesira utilice mis datos para gestionar
+              esta reserva y coordinar la entrega.
+              Consulta la política de privacidad antes de continuar.
+            </span>
+
+          </label>
+
+
+          <!-- BOTÓN -->
+
+          <button
+            type="submit"
+            class="submit-btn"
+            id="submitBtn"
+          >
+            Solicitar reserva
+          </button>
+
+
+          <p class="form-footnote">
+            La solicitud deberá enviarse para que Vesira pueda
+            recibirla y confirmar contigo los detalles de la entrega.
+          </p>
+
+
+          <!-- MENSAJES -->
+
+          <div
+            class="feedback"
+            id="feedback"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></div>
+
+        </form>
+
+      </section>
+
+
+      <!-- RESUMEN -->
+
+      <aside class="summary">
+
+        <h2>Tu reserva</h2>
+
+        <p class="summary-intro">
+          Revisa los productos que has seleccionado antes de
+          enviar tu solicitud.
+        </p>
+
+
+        <div
+          class="products"
+          id="products"
+        ></div>
+
+
+        <div class="summary-line">
+
+          <span>
+            Subtotal
+          </span>
+
+          <strong id="subtotal">
+            0,00 €
+          </strong>
+
+        </div>
+
+
+        <div class="cash-label">
+
+          <span class="material-symbols-outlined">
+            payments
+          </span>
+
+          <span>
+            Pago en efectivo<br>
+            <strong>En mano al recibirlo</strong>
+          </span>
+
+        </div>
+
+
+        <a class="back-link" href="carrito.html">
+          Volver al carrito
+        </a>
+
+      </aside>
+
+    </div>
+
+
+    <footer class="page-footer">
+      VESIRA · RESERVA TU EXPERIENCIA
+    </footer>
+
+  </main>
+
+
+  <script>
+    /* =========================================================
+       CONFIGURACIÓN
+    ========================================================= */
+
+    const CART_KEY = 'vesiraCarrito';
+
+    /*
+      AÑADE AQUÍ EL WHATSAPP DE CONTACTO DE VESIRA.
+
+      Ejemplo de formato:
+      const WHATSAPP_NUMBER = '34600111222';
+
+      Debe incluir el prefijo del país, solo números,
+      sin espacios ni el signo +.
+
+      Hasta que configures el número, el formulario validará
+      los datos, pero no podrá enviar la reserva.
+    */
+
+    const WHATSAPP_NUMBER = '';
+
+
+    /* =========================================================
+       HORARIOS DE EJEMPLO POR ZONA
+
+       Sustituye estas zonas y horas por los puntos de entrega
+       y horarios reales de Vesira.
+    ========================================================= */
+
+    const HORARIOS_POR_ZONA = {
+      centro: [
+        '10:00',
+        '11:00',
+        '12:00',
+        '16:00',
+        '17:00',
+        '18:00'
+      ],
+
+      norte: [
+        '10:30',
+        '12:30',
+        '16:30',
+        '18:30'
+      ],
+
+      sur: [
+        '11:00',
+        '13:00',
+        '17:00',
+        '19:00'
+      ]
+    };
+
+
+    /* =========================================================
+       ELEMENTOS
+    ========================================================= */
+
+    const form = document.getElementById('reservationForm');
+
+    const nombreInput = document.getElementById('nombre');
+    const apellidosInput = document.getElementById('apellidos');
+    const dniInput = document.getElementById('dni');
+
+    const zonaSelect = document.getElementById('zona');
+    const horaSelect = document.getElementById('hora');
+
+    const horarioHint = document.getElementById('horarioHint');
+
+    const productsElement = document.getElementById('products');
+    const subtotalElement = document.getElementById('subtotal');
+
+    const submitBtn = document.getElementById('submitBtn');
+    const feedback = document.getElementById('feedback');
+
+
+    /* =========================================================
+       UTILIDADES
+    ========================================================= */
+
+    function numberOrZero(value) {
+      const number = Number(value);
+
+      return Number.isFinite(number) ? number : 0;
+    }
+
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+
+    function eur(value) {
+      return numberOrZero(value)
+        .toFixed(2)
+        .replace('.', ',') + ' €';
+    }
+
+
+    function getCart() {
+      try {
+        const raw = localStorage.getItem(CART_KEY);
+
+        if (!raw) {
+          return [];
+        }
+
+        const cart = JSON.parse(raw);
+
+        return Array.isArray(cart)
+          ? cart.filter(item => item && typeof item === 'object')
+          : [];
+
+      } catch (error) {
+        console.error('Error leyendo el carrito:', error);
+        return [];
+      }
+    }
+
+
+    function getQuantity(item) {
+      return Math.max(
+        1,
+        Math.floor(numberOrZero(item.cantidad || 1))
+      );
+    }
+
+
+    function getPrice(item) {
+      return Math.max(
+        0,
+        numberOrZero(item.precio)
+      );
+    }
+
+
+    function getSubtotal(cart) {
+      return cart.reduce((sum, item) => {
+        return sum + getPrice(item) * getQuantity(item);
+      }, 0);
+    }
+
+
+    /* =========================================================
+       ACTUALIZAR CONTADOR DE LA NAVBAR
+    ========================================================= */
+
+    function updateNavbarCartCount() {
+      const cart = getCart();
+
+      const count = cart.reduce((sum, item) => {
+        return sum + Math.max(
+          0,
+          numberOrZero(item.cantidad)
+        );
+      }, 0);
+
+      const counters = document.querySelectorAll(
+        '[data-cart-count], ' +
+        '[data-cart-badge], ' +
+        '.cart-count, ' +
+        '.cart-badge, ' +
+        '#cart-count, ' +
+        '#cart-badge'
+      );
+
+      counters.forEach(counter => {
+        counter.textContent = count;
+        counter.style.display = count > 0 ? '' : 'none';
+      });
+    }
+
+
+    /* =========================================================
+       MOSTRAR PRODUCTOS DEL CARRITO
+    ========================================================= */
+
+    function renderSummary() {
+      const cart = getCart();
+
+      updateNavbarCartCount();
+
+      const subtotal = getSubtotal(cart);
+
+      subtotalElement.textContent = eur(subtotal);
+
+
+      if (!cart.length) {
+        productsElement.innerHTML = `
+          <div class="empty-cart">
+            No hay productos en tu carrito.
+            <br>
+            Vuelve al carrito y añade las gafas que quieres reservar.
+          </div>
+        `;
+
+        submitBtn.disabled = true;
+
+        return;
+      }
+
+
+      submitBtn.disabled = false;
+
+      productsElement.innerHTML = cart.map(item => {
+        const name = escapeHtml(item.nombre || 'Vesira');
+        const image = escapeHtml(item.imagen || '');
+        const quantity = getQuantity(item);
+        const price = getPrice(item);
+        const total = quantity * price;
+
+        return `
+          <article class="product">
+
+            <div class="product-img">
+
+              <img
+                src="${image}"
+                alt="${name}"
+                loading="lazy"
+              >
+
+            </div>
+
+            <div class="product-info">
+
+              <h3>${name}</h3>
+
+              <p>
+                Cantidad: ${quantity}
+              </p>
+
+              <div class="product-price">
+                ${eur(total)}
+              </div>
+
+            </div>
+
+          </article>
+        `;
+
+      }).join('');
+    }
+
+
+    /* =========================================================
+       ACTUALIZAR HORARIOS SEGÚN LA ZONA
+    ========================================================= */
+
+    function updateHours() {
+      const zona = zonaSelect.value;
+      const horarios = HORARIOS_POR_ZONA[zona] || [];
+
+      horaSelect.innerHTML = '';
+
+      if (!zona || !horarios.length) {
+        horaSelect.disabled = true;
+
+        horaSelect.add(new Option(
+          'Primero selecciona una zona',
+          ''
+        ));
+
+        horarioHint.textContent =
+          'Los horarios aparecerán al seleccionar tu zona.';
+
+        return;
+      }
+
+
+      horaSelect.disabled = false;
+
+      horaSelect.add(new Option(
+        'Selecciona una hora',
+        ''
+      ));
+
+      horarios.forEach(hora => {
+        horaSelect.add(new Option(hora, hora));
+      });
+
+      horarioHint.textContent =
+        'Selecciona una de las horas disponibles para esta zona.';
+    }
+
+
+    zonaSelect.addEventListener('change', updateHours);
+
+
+    /* =========================================================
+       NORMALIZAR DNI
+    ========================================================= */
+
+    dniInput.addEventListener('input', () => {
+      dniInput.value = dniInput.value
+        .toUpperCase()
+        .replace(/\s/g, '')
+        .slice(0, 9);
+
+      dniInput.setCustomValidity('');
+    });
+
+
+    /* =========================================================
+       VALIDAR DNI ESPAÑOL
+    ========================================================= */
+
+    function isValidDNI(value) {
+      const dni = String(value || '')
+        .trim()
+        .toUpperCase();
+
+      if (!/^\d{8}[A-Z]$/.test(dni)) {
+        return false;
+      }
+
+      const letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
+      const number = Number(dni.slice(0, 8));
+      const expectedLetter = letters[number % 23];
+
+      return dni[8] === expectedLetter;
+    }
+
+
+    /* =========================================================
+       MENSAJES DE ESTADO
+    ========================================================= */
+
+    function showFeedback(message, type = '') {
+      feedback.textContent = message;
+      feedback.className = 'feedback';
+
+      if (type) {
+        feedback.classList.add(type);
+      }
+
+      feedback.hidden = false;
+    }
+
+
+    function hideFeedback() {
+      feedback.hidden = true;
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+    }
+
+
+    /* =========================================================
+       CREAR SOLICITUD DE RESERVA
+    ========================================================= */
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+
+      hideFeedback();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+
+      /* Validar DNI */
+
+      if (!isValidDNI(dniInput.value)) {
+        dniInput.setCustomValidity(
+          'Comprueba el DNI. La letra no coincide con el número.'
+        );
+
+        dniInput.reportValidity();
+
+        dniInput.setCustomValidity('');
+
+        return;
+      }
+
+
+      /* Comprobar carrito */
+
+      const cart = getCart();
+
+      if (!cart.length) {
+        showFeedback(
+          'Tu carrito está vacío. Añade primero los productos que quieres reservar.',
+          'error'
+        );
+
+        return;
+      }
+
+
+      /* Comprobar selección */
+
+      const zona = zonaSelect.value;
+      const hora = horaSelect.value;
+
+      if (
+        !zona ||
+        !hora ||
+        !HORARIOS_POR_ZONA[zona] ||
+        !HORARIOS_POR_ZONA[zona].includes(hora)
+      ) {
+        showFeedback(
+          'Selecciona una zona y un horario disponible.',
+          'error'
+        );
+
+        return;
+      }
+
+
+      /*
+        Evitar enviar una reserva falsa:
+        el WhatsApp debe configurarse antes de recibir solicitudes.
+      */
+
+      const phone = WHATSAPP_NUMBER.replace(/\D/g, '');
+
+      if (!/^\d{8,15}$/.test(phone)) {
+        showFeedback(
+          'El formulario está preparado, pero todavía falta configurar el número de WhatsApp de Vesira para poder enviar las solicitudes de reserva.',
+          'error'
+        );
+
+        return;
+      }
+
+
+      /* Obtener nombres legibles */
+
+      const zonaLabel = zonaSelect.options[
+        zonaSelect.selectedIndex
+      ].text;
+
+
+      /* Crear resumen del pedido */
+
+      const productLines = cart.map(item => {
+        const name = String(item.nombre || 'Vesira');
+        const quantity = getQuantity(item);
+        const total = getPrice(item) * quantity;
+
+        return `- ${name} x ${quantity}: ${eur(total)}`;
+      });
+
+
+      /*
+        Preparar mensaje para WhatsApp.
+
+        El DNI se incluirá en el mensaje de reserva.
+        Los datos no se guardan en localStorage.
+      */
+
+      const message = [
+        'SOLICITUD DE RESERVA · VESIRA',
+        '',
+        `Nombre: ${nombreInput.value.trim()}`,
+        `Apellidos: ${apellidosInput.value.trim()}`,
+        `DNI: ${dniInput.value.trim().toUpperCase()}`,
+        '',
+        `Zona de entrega: ${zonaLabel}`,
+        `Hora elegida: ${hora}`,
+        '',
+        'PRODUCTOS:',
+        ...productLines,
+        '',
+        `Subtotal: ${eur(getSubtotal(cart))}`,
+        'Forma de pago: efectivo, en mano al recibir el pedido.',
+        '',
+        'Esta es una solicitud de reserva pendiente de confirmación.'
+      ].join('\n');
+
+
+      /*
+        Abrir WhatsApp con el mensaje preparado.
+        El cliente deberá pulsar Enviar en WhatsApp.
+      */
+
+      const whatsappURL =
+        `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+      window.location.href = whatsappURL;
+    });
+
+
+    /* =========================================================
+       INICIO
+    ========================================================= */
+
+    renderSummary();
+    updateHours();
+
+  </script>
+
+</body>
+</html>

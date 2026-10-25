@@ -912,9 +912,7 @@
           </a>
 
 
-          <span class="vesira-nav-eyewear">
-            EYEWEAR
-          </span>
+      
 
         </div>
 

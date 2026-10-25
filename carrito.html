@@ -20,7 +20,7 @@
       --f: #0a0a0a;
       --t: #fff;
       --s: #8c8c8c;
-      --b: rgba(255,255,255,.1);
+      --b: rgba(255, 255, 255, .1);
       --c: #141414;
     }
 
@@ -146,6 +146,10 @@
       cursor: pointer;
     }
 
+    .qty button:hover {
+      color: #aaa;
+    }
+
     .qty span {
       min-width: 28px;
       text-align: center;
@@ -158,6 +162,10 @@
       color: #707070;
       font-size: 9px;
       cursor: pointer;
+    }
+
+    .del:hover {
+      color: #fff;
     }
 
     .totalitem {
@@ -192,6 +200,11 @@
       font-size: 11px;
     }
 
+    .row strong {
+      color: #fff;
+      font-weight: 500;
+    }
+
     .buy {
       width: 100%;
       min-height: 50px;
@@ -202,6 +215,19 @@
       color: #0a0a0a;
       font-size: 11px;
       cursor: pointer;
+      transition: background .2s, color .2s, transform .2s;
+    }
+
+    .buy:hover {
+      background: #dedede;
+      transform: translateY(-1px);
+    }
+
+    .buy:focus-visible,
+    .qty button:focus-visible,
+    .del:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 4px;
     }
 
     .continue {
@@ -211,6 +237,10 @@
       font-size: 9px;
       text-decoration: underline;
       text-underline-offset: 4px;
+    }
+
+    .continue:hover {
+      color: #fff;
     }
 
     .empty {
@@ -239,10 +269,16 @@
       padding: 0 20px;
       height: 46px;
       align-items: center;
+      justify-content: center;
       border-radius: 999px;
       background: #fff;
       color: #0a0a0a;
       font-size: 10px;
+      transition: background .2s;
+    }
+
+    .empty a:hover {
+      background: #dedede;
     }
 
     .toast {
@@ -251,18 +287,20 @@
       left: 50%;
       transform: translate(-50%, 15px);
       opacity: 0;
+      visibility: hidden;
       background: #161616;
       border: 1px solid var(--b);
       border-radius: 999px;
       padding: 11px 15px;
       font-size: 10px;
-      transition: .25s;
+      transition: opacity .25s, transform .25s, visibility .25s;
       z-index: 20;
       pointer-events: none;
     }
 
     .toast.on {
       opacity: 1;
+      visibility: visible;
       transform: translate(-50%, 0);
     }
 
@@ -318,7 +356,7 @@
 
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR DE VESIRA -->
   <script src="vesira-navbar.js"></script>
 
   <main class="wrap">
@@ -331,13 +369,31 @@
 
   </main>
 
-  <div class="toast" id="toast"></div>
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
 
   <script>
     const content = document.getElementById('content');
     const toast = document.getElementById('toast');
 
     const CART_KEY = 'vesiraCarrito';
+
+    let toastTimer;
+
+
+    /* =========================================================
+       CONVERSIÓN SEGURA A NÚMERO
+    ========================================================= */
+
+    function numberOrZero(value) {
+      const number = Number(value);
+
+      return Number.isFinite(number) ? number : 0;
+    }
 
 
     /* =========================================================
@@ -354,7 +410,9 @@
 
         const cart = JSON.parse(raw);
 
-        return Array.isArray(cart) ? cart : [];
+        return Array.isArray(cart)
+          ? cart.filter(item => item && typeof item === 'object')
+          : [];
 
       } catch (error) {
         console.error('Error leyendo el carrito:', error);
@@ -365,37 +423,31 @@
 
     /* =========================================================
        CONTAR UNIDADES REALES
-       
-       IMPORTANTE:
-       NO usamos cart.length.
 
-       Ejemplo:
-       1 producto con cantidad 4 = 4
-       2 productos con cantidades 2 y 3 = 5
+       Un producto con cantidad 4 = 4 unidades.
+       Dos productos con cantidades 2 y 3 = 5 unidades.
     ========================================================= */
 
     function getCartCount(cart = getCart()) {
       return cart.reduce((total, item) => {
-        return total + Math.max(
+        const cantidad = Math.max(
           0,
-          Number(item.cantidad || 0)
+          numberOrZero(item.cantidad)
         );
+
+        return total + cantidad;
       }, 0);
     }
 
 
     /* =========================================================
-       ACTUALIZAR CONTADOR DE LA NAVBAR
+       ACTUALIZAR VISUALMENTE EL CONTADOR DE LA NAVBAR
+
+       Esta función modifica los contadores de la página,
+       pero NO emite eventos. Así evitamos bucles infinitos.
     ========================================================= */
 
-    function updateNavbarCartCount() {
-      const count = getCartCount();
-
-      /*
-       * Intentamos localizar el contador del carrito
-       * independientemente de cómo esté construido
-       * el navbar.
-       */
+    function setNavbarCartCount(count = getCartCount()) {
       const counters = document.querySelectorAll(
         '[data-cart-count], ' +
         '[data-cart-badge], ' +
@@ -408,24 +460,29 @@
       counters.forEach(counter => {
         counter.textContent = count;
 
-        if (count > 0) {
-          counter.style.display = '';
-        } else {
-          counter.style.display = 'none';
-        }
+        counter.style.display = count > 0 ? '' : 'none';
       });
+    }
 
-      /*
-       * IMPORTANTE:
-       * Emitimos también un evento global.
-       *
-       * vesira-navbar.js podrá escuchar este evento
-       * para actualizar su propio contador.
-       */
+
+    /* =========================================================
+       ACTUALIZAR CONTADOR Y NOTIFICAR A OTRAS PARTES DE VESIRA
+
+       El evento se emite una sola vez. El listener de este
+       archivo solo actualiza el contador visual y no vuelve
+       a emitir el mismo evento.
+    ========================================================= */
+
+    function updateNavbarCartCount() {
+      const cart = getCart();
+      const count = getCartCount(cart);
+
+      setNavbarCartCount(count);
+
       window.dispatchEvent(
         new CustomEvent('vesira:cart-updated', {
           detail: {
-            cart: getCart(),
+            cart: cart,
             count: count
           }
         })
@@ -438,16 +495,23 @@
     ========================================================= */
 
     function saveCart(cart) {
+      try {
+        localStorage.setItem(
+          CART_KEY,
+          JSON.stringify(cart)
+        );
 
-      localStorage.setItem(
-        CART_KEY,
-        JSON.stringify(cart)
-      );
+        updateNavbarCartCount();
 
-      /*
-       * Actualización inmediata.
-       */
-      updateNavbarCartCount();
+        return true;
+
+      } catch (error) {
+        console.error('Error guardando el carrito:', error);
+
+        msg('No se pudo guardar el carrito');
+
+        return false;
+      }
     }
 
 
@@ -455,26 +519,25 @@
        FORMATO DE PRECIO
     ========================================================= */
 
-    function eur(n) {
-      return Number(n || 0)
-        .toFixed(2)
-        .replace('.', ',') + ' €';
+    function eur(value) {
+      const number = numberOrZero(value);
+
+      return number.toFixed(2).replace('.', ',') + ' €';
     }
 
 
     /* =========================================================
-       TOAST
+       MENSAJES TEMPORALES
     ========================================================= */
 
     function msg(text) {
-
       toast.textContent = text;
 
       toast.classList.add('on');
 
-      clearTimeout(window._t);
+      clearTimeout(toastTimer);
 
-      window._t = setTimeout(() => {
+      toastTimer = setTimeout(() => {
         toast.classList.remove('on');
       }, 1400);
     }
@@ -485,7 +548,6 @@
     ========================================================= */
 
     function qty(id, delta) {
-
       const cart = getCart();
 
       const item = cart.find(
@@ -498,22 +560,18 @@
 
       const currentQuantity = Math.max(
         1,
-        Number(item.cantidad || 1)
+        numberOrZero(item.cantidad || 1)
       );
 
       item.cantidad = Math.max(
         1,
-        currentQuantity + Number(delta)
+        currentQuantity + numberOrZero(delta)
       );
 
-      /*
-       * Guarda el nuevo carrito Y actualiza la navbar.
-       */
-      saveCart(cart);
+      if (!saveCart(cart)) {
+        return;
+      }
 
-      /*
-       * Redibuja el carrito.
-       */
       render();
 
       if (delta > 0) {
@@ -529,21 +587,16 @@
     ========================================================= */
 
     function removeItem(id) {
-
       const cart = getCart();
 
       const newCart = cart.filter(
-        i => String(i.id) !== String(id)
+        item => String(item.id) !== String(id)
       );
 
-      /*
-       * Guarda y actualiza la navbar.
-       */
-      saveCart(newCart);
+      if (!saveCart(newCart)) {
+        return;
+      }
 
-      /*
-       * Redibuja el carrito.
-       */
       render();
 
       msg('Producto eliminado');
@@ -552,11 +605,13 @@
 
     /* =========================================================
        ESCAPAR HTML
+
+       Evita que los valores de los productos se interpreten
+       como etiquetas HTML o atributos ejecutables.
     ========================================================= */
 
     function escapeHtml(value) {
-
-      return String(value)
+      return String(value ?? '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
@@ -566,37 +621,34 @@
 
 
     /* =========================================================
-       RENDER
+       RENDERIZAR CARRITO
     ========================================================= */
 
     function render() {
-
       const cart = getCart();
 
-      /*
-       * SIEMPRE sincronizamos el contador primero.
-       */
+      // Sincronizar contador al actualizar la página.
       updateNavbarCartCount();
 
 
-      const subtotal = cart.reduce(
-        (sum, item) => {
+      /* =======================================================
+         CALCULAR SUBTOTAL
+      ======================================================= */
 
-          const precio = Number(
-            item.precio || 0
-          );
+      const subtotal = cart.reduce((sum, item) => {
+        const precio = Math.max(
+          0,
+          numberOrZero(item.precio)
+        );
 
-          const cantidad = Number(
-            item.cantidad || 0
-          );
+        const cantidad = Math.max(
+          0,
+          numberOrZero(item.cantidad)
+        );
 
-          return sum + (
-            precio * cantidad
-          );
+        return sum + (precio * cantidad);
 
-        },
-        0
-      );
+      }, 0);
 
 
       /* =======================================================
@@ -604,7 +656,6 @@
       ======================================================= */
 
       if (!cart.length) {
-
         content.innerHTML = `
           <section class="empty">
 
@@ -628,28 +679,30 @@
 
 
       /* =======================================================
-         PRODUCTOS
+         LISTA DE PRODUCTOS
       ======================================================= */
 
       content.innerHTML = `
         <div class="layout">
 
-          <section class="items">
+          <section class="items" aria-label="Productos del carrito">
 
             ${cart.map(item => {
-
               const cantidad = Math.max(
                 1,
-                Number(item.cantidad || 1)
+                numberOrZero(item.cantidad || 1)
               );
 
-              const precio = Number(
-                item.precio || 0
+              const precio = Math.max(
+                0,
+                numberOrZero(item.precio)
               );
 
-              const totalItem =
-                precio * cantidad;
+              const totalItem = precio * cantidad;
 
+              const id = escapeHtml(String(item.id ?? ''));
+              const imagen = escapeHtml(item.imagen || '');
+              const nombre = escapeHtml(item.nombre || 'Vesira');
 
               return `
                 <article class="item">
@@ -657,65 +710,53 @@
                   <div class="img">
 
                     <img
-                      src="${escapeHtml(item.imagen || '')}"
-                      alt="${escapeHtml(item.nombre || 'Vesira')}"
+                      src="${imagen}"
+                      alt="${nombre}"
+                      loading="lazy"
                     >
 
                   </div>
 
-
                   <div class="info">
 
-                    <h2>
-                      ${escapeHtml(item.nombre || '')}
-                    </h2>
+                    <h2>${nombre}</h2>
 
                     <div class="price">
                       ${eur(precio)}
                     </div>
 
-
                     <div class="controls">
 
-                      <div class="qty">
+                      <div class="qty" aria-label="Cantidad">
 
                         <button
                           type="button"
-                          aria-label="Quitar una unidad"
-                          onclick='qty(
-                            ${JSON.stringify(item.id)},
-                            -1
-                          )'
+                          data-action="decrease"
+                          data-id="${id}"
+                          aria-label="Quitar una unidad de ${nombre}"
                         >
                           −
                         </button>
 
-
-                        <span>
-                          ${cantidad}
-                        </span>
-
+                        <span>${cantidad}</span>
 
                         <button
                           type="button"
-                          aria-label="Añadir una unidad"
-                          onclick='qty(
-                            ${JSON.stringify(item.id)},
-                            1
-                          )'
+                          data-action="increase"
+                          data-id="${id}"
+                          aria-label="Añadir una unidad de ${nombre}"
                         >
                           +
                         </button>
 
                       </div>
 
-
                       <button
                         type="button"
                         class="del"
-                        onclick='removeItem(
-                          ${JSON.stringify(item.id)}
-                        )'
+                        data-action="remove"
+                        data-id="${id}"
+                        aria-label="Eliminar ${nombre} del carrito"
                       >
                         Eliminar
                       </button>
@@ -724,25 +765,24 @@
 
                   </div>
 
-
                   <div class="totalitem">
                     ${eur(totalItem)}
                   </div>
 
                 </article>
               `;
-
             }).join('')}
 
           </section>
 
+
+          <!-- RESUMEN DEL CARRITO -->
 
           <aside class="summary">
 
             <h2>
               Resumen
             </h2>
-
 
             <div class="row">
 
@@ -756,15 +796,19 @@
 
             </div>
 
+            <!--
+              El formulario de reserva se creará en reserva.html.
+              Este botón redirige a esa página.
+            -->
 
             <button
               class="buy"
               id="buy"
               type="button"
+              data-action="reserve"
             >
-              Continuar con el pedido
+              Reservar
             </button>
-
 
             <a
               class="continue"
@@ -777,23 +821,50 @@
 
         </div>
       `;
-
-
-      const buy = document.getElementById('buy');
-
-      if (buy) {
-
-        buy.onclick = () => {
-
-          if (!getCart().length) {
-            return;
-          }
-
-          window.location.href =
-            'checkout.html';
-        };
-      }
     }
+
+
+    /* =========================================================
+       ACCIONES DE LOS BOTONES
+
+       Utilizamos delegación de eventos para que los botones
+       sigan funcionando después de volver a dibujar el carrito.
+    ========================================================= */
+
+    content.addEventListener('click', event => {
+      const button = event.target.closest('button[data-action]');
+
+      if (!button || !content.contains(button)) {
+        return;
+      }
+
+      const action = button.dataset.action;
+      const id = button.dataset.id;
+
+      if (action === 'increase') {
+        qty(id, 1);
+        return;
+      }
+
+      if (action === 'decrease') {
+        qty(id, -1);
+        return;
+      }
+
+      if (action === 'remove') {
+        removeItem(id);
+        return;
+      }
+
+      if (action === 'reserve') {
+        if (!getCart().length) {
+          return;
+        }
+
+        // Página de reserva que crearemos después.
+        window.location.href = 'reserva.html';
+      }
+    });
 
 
     /* =========================================================
@@ -801,34 +872,25 @@
     ========================================================= */
 
     window.addEventListener('storage', event => {
-
-      if (event.key !== CART_KEY) {
+      if (event.key !== CART_KEY && event.key !== null) {
         return;
       }
 
       render();
-
     });
 
 
     /* =========================================================
        CAMBIOS DESDE OTRAS PARTES DE VESIRA
+
+       Importante: aquí solo actualizamos el contador visual.
+       No volvemos a emitir vesira:cart-updated, evitando
+       un bucle recursivo de eventos.
     ========================================================= */
 
-    window.addEventListener(
-      'vesira:cart-updated',
-      () => {
-
-        /*
-         * No hacemos render aquí porque ya lo hacemos
-         * después de qty/removeItem.
-         *
-         * Solo mantenemos el contador sincronizado.
-         */
-        updateNavbarCartCount();
-
-      }
-    );
+    window.addEventListener('vesira:cart-updated', () => {
+      setNavbarCartCount();
+    });
 
 
     /* =========================================================
