@@ -1,65 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta
     name="description"
-    content="Programa de Afiliados Vesira. Consigue tu código personal y gana una comisión por cada venta."
+    content="Forma parte de los afiliados de Vesira. Gana una comisión por cada venta y únete a nuestra empresa."
   >
+
+  <meta name="theme-color" content="#0c0c0c">
 
   <title>Afiliados · VESIRA</title>
 
-
-  <!-- =========================================================
-       FUENTES
-       ========================================================= -->
-
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Outfit:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
-
   <style>
-
-    /* =========================================================
+    /* =========================
        VARIABLES
-       ========================================================= */
+    ========================= */
 
     :root {
       --bg: #0c0c0c;
       --text: #ffffff;
-      --muted: #858585;
-      --muted-dark: #555555;
-      --line: #242424;
+      --muted: #8b8b8b;
+      --line: #252525;
       --soft-line: #1b1b1b;
     }
 
-
-    /* =========================================================
+    /* =========================
        RESET
-       ========================================================= */
+    ========================= */
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -73,16 +57,9 @@
       min-height: 100vh;
       background: var(--bg);
       color: var(--text);
-
-      font-family:
-        "Outfit",
-        Arial,
-        sans-serif;
-
-      overflow-x: hidden;
-
+      font-family: "Outfit", sans-serif;
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
     }
 
     a {
@@ -90,848 +67,594 @@
       text-decoration: none;
     }
 
-    button {
-      font: inherit;
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
     }
 
+    /* =========================
+       PÁGINA
+    ========================= */
 
-    /* =========================================================
-       CONTENIDO
-       ========================================================= */
+    .page {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 100svh;
+      overflow: hidden;
+    }
 
-    main {
-      width: min(
-        760px,
-        calc(100% - 32px)
+    .page::before {
+      content: "";
+      position: absolute;
+      top: -240px;
+      left: 50%;
+      width: 680px;
+      height: 480px;
+      transform: translateX(-50%);
+      background: radial-gradient(
+        ellipse,
+        rgba(255, 255, 255, 0.055) 0%,
+        rgba(255, 255, 255, 0) 70%
       );
-
-      margin: 0 auto;
-
-      padding:
-        125px
-        0
-        100px;
+      pointer-events: none;
     }
 
-
-    /* =========================================================
-       HERO
-       ========================================================= */
-
-    .hero {
-      text-align: center;
-      margin-bottom: 75px;
-    }
-
-    .eyebrow {
-      margin-bottom: 18px;
-
-      color: var(--muted-dark);
-
-      font-size: 9px;
-      font-weight: 500;
-
-      letter-spacing: .28em;
-      line-height: 1;
-
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      font-family:
-        "Bricolage Grotesque",
-        Arial,
-        sans-serif;
-
-      font-size:
-        clamp(
-          62px,
-          10vw,
-          108px
-        );
-
-      font-weight: 400;
-
-      line-height: .82;
-      letter-spacing: -.075em;
-
-      transform: skewX(-7deg);
-    }
-
-    .lead {
-      width: min(
-        500px,
-        100%
-      );
-
-      margin:
-        30px
-        auto
-        0;
-
-      color: var(--muted);
-
-      font-size: 11px;
-      line-height: 1.75;
-    }
-
-
-    /* =========================================================
-       INTRO
-       ========================================================= */
-
-    .intro {
-      padding:
-        0
-        0
-        62px;
-
-      border-bottom:
-        1px solid
-        var(--line);
-    }
-
-    .section-label {
-      margin-bottom: 18px;
-
-      color: var(--muted-dark);
-
-      font-size: 8px;
-      font-weight: 500;
-
-      letter-spacing: .22em;
-
-      text-transform: uppercase;
-    }
-
-    .intro h2 {
-      max-width: 650px;
-
-      font-family:
-        "Bricolage Grotesque",
-        Arial,
-        sans-serif;
-
-      font-size:
-        clamp(
-          40px,
-          6vw,
-          62px
-        );
-
-      font-weight: 400;
-
-      line-height: .92;
-      letter-spacing: -.06em;
-    }
-
-    .intro-copy {
-      max-width: 530px;
-
-      margin-top: 25px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-      line-height: 1.75;
-    }
-
-    .intro-copy strong {
-      color: #ffffff;
-      font-weight: 500;
-    }
-
-
-    /* =========================================================
-       AFILIADOS
-       ========================================================= */
-
-    .affiliate-content {
-      padding:
-        58px
-        0;
-    }
-
-    .affiliate-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          2,
-          1fr
-        );
-
-      gap: 45px;
-    }
-
-    .affiliate-block {
-      padding-top: 18px;
-
-      border-top:
-        1px solid
-        var(--soft-line);
-    }
-
-    .affiliate-block h3 {
-      margin-bottom: 12px;
-
-      font-family:
-        "Bricolage Grotesque",
-        Arial,
-        sans-serif;
-
-      font-size: 25px;
-      font-weight: 400;
-
-      letter-spacing: -.04em;
-    }
-
-    .affiliate-block p {
-      color: var(--muted);
-
-      font-size: 10px;
-      line-height: 1.7;
-    }
-
-    .affiliate-block p strong {
-      color: #ffffff;
-      font-weight: 500;
-    }
-
-
-    /* =========================================================
-       STATEMENT
-       ========================================================= */
-
-    .statement {
-      padding:
-        58px
-        0
-        62px;
-
-      border-top:
-        1px solid
-        var(--line);
-
-      border-bottom:
-        1px solid
-        var(--line);
-    }
-
-    .statement p {
-      max-width: 680px;
-
-      font-family:
-        "Bricolage Grotesque",
-        Arial,
-        sans-serif;
-
-      font-size:
-        clamp(
-          34px,
-          5.5vw,
-          55px
-        );
-
-      font-weight: 400;
-
-      line-height: .96;
-      letter-spacing: -.055em;
-    }
-
-    .statement p span {
-      color: #555555;
-    }
-
-
-    /* =========================================================
-       CTA
-       ========================================================= */
-
-    .cta-wrap {
-      padding-top: 48px;
-    }
-
-    .cta-label {
-      margin-bottom: 14px;
-
-      color: var(--muted-dark);
-
-      font-size: 8px;
-      font-weight: 500;
-
-      letter-spacing: .22em;
-
-      text-transform: uppercase;
-    }
-
-    .cta {
-      width: 100%;
-
-      min-height: 56px;
-
-      padding:
-        0
-        20px;
-
+    /* =========================
+       CABECERA
+    ========================= */
+
+    .topbar {
+      position: relative;
+      z-index: 1;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      width: min(1100px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--soft-line);
+    }
 
-      gap: 15px;
-
-      border:
-        1px solid
-        #ffffff;
-
-      border-radius: 999px;
-
-      background: #ffffff;
-      color: #080808;
-
-      font-size: 9px;
+    .brand {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: 23px;
       font-weight: 600;
+      letter-spacing: -0.08em;
+    }
 
-      letter-spacing: .1em;
-
+    .topbar-label {
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.19em;
       text-transform: uppercase;
-
-      transition:
-        background .25s ease,
-        color .25s ease,
-        transform .25s ease;
     }
 
-    .cta:hover {
-      background: transparent;
-      color: #ffffff;
+    /* =========================
+       CONTENIDO PRINCIPAL
+    ========================= */
 
-      transform:
-        translateY(-2px);
-    }
-
-    .cta .material-symbols-outlined {
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .note {
-      margin-top: 12px;
-
-      color: #505050;
-
-      font-size: 8px;
-      line-height: 1.5;
-
+    main {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: min(850px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 100px 0 110px;
       text-align: center;
     }
 
-
-    /* =========================================================
-       MARQUEE
-       ========================================================= */
-
-    .marquee-vesira {
-      width: 100%;
-      overflow: hidden;
-
-      padding:
-        34px
-        0;
-
-      border-top:
-        1px solid
-        var(--line);
-    }
-
-    .marquee-vesira-track {
-      display: flex;
-
-      width: max-content;
-
-      animation:
-        vesiraLoop
-        18s
-        linear
-        infinite;
-    }
-
-    .marquee-vesira-group {
+    .eyebrow {
       display: flex;
       align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 27px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
 
-      gap: 70px;
+    .eyebrow::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
 
-      padding-right: 70px;
+    h1 {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: clamp(60px, 10vw, 112px);
+      font-weight: 400;
+      line-height: 0.88;
+      letter-spacing: -0.085em;
+    }
 
+    h1 span {
+      color: #626262;
+    }
+
+    .intro {
+      max-width: 465px;
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.9;
+    }
+
+    .intro strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* =========================
+       MENSAJE PRINCIPAL
+    ========================= */
+
+    .statement {
+      width: min(520px, 100%);
+      margin-top: 65px;
+      padding: 25px 15px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .statement p {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: clamp(27px, 4vw, 37px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.055em;
+    }
+
+    .statement span {
+      color: #686868;
+    }
+
+    /* =========================
+       CONTACTO
+    ========================= */
+
+    .contact {
+      width: min(410px, 100%);
+      margin-top: 54px;
+    }
+
+    .contact-label {
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 11px;
+    }
+
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      width: 100%;
+      min-height: 58px;
+      padding: 0 21px;
+      border: 1px solid #ffffff;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-instagram {
+      background: #ffffff;
+      color: #0c0c0c;
+    }
+
+    .button-instagram:hover {
+      background: transparent;
+      color: #ffffff;
+    }
+
+    .button-whatsapp {
+      border-color: #303030;
+      background: transparent;
+      color: #ffffff;
+    }
+
+    .button-whatsapp:hover {
+      border-color: #ffffff;
+      background: #ffffff;
+      color: #0c0c0c;
+    }
+
+    .button-icon {
+      display: grid;
       flex-shrink: 0;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      font-size: 16px;
+      line-height: 1;
     }
 
-    .marquee-vesira-group img {
-      width: 155px;
-      height: 60px;
-
-      display: block;
-
-      object-fit: contain;
-
-      flex-shrink: 0;
+    .contact-note {
+      margin-top: 18px;
+      color: #777777;
+      font-size: 10px;
+      line-height: 1.8;
     }
 
-    @keyframes vesiraLoop {
+    /* =========================
+       ESTADO DEL MENSAJE
+    ========================= */
 
-      from {
-        transform:
-          translateX(0);
-      }
-
-      to {
-        transform:
-          translateX(-50%);
-      }
-
+    .feedback {
+      margin-top: 14px;
+      color: #b8b8b8;
+      font-size: 11px;
+      line-height: 1.7;
     }
 
+    .feedback:empty {
+      display: none;
+    }
 
-    /* =========================================================
-       MÓVIL
-       ========================================================= */
+    /* =========================
+       PIE DE PÁGINA
+    ========================= */
+
+    footer {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: min(1100px, calc(100% - 64px));
+      margin: 0 auto;
+      padding: 23px 0;
+      border-top: 1px solid var(--soft-line);
+    }
+
+    .footer-brand {
+      color: #666666;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+    }
+
+    .footer-copy {
+      color: #666666;
+      font-size: 9px;
+    }
+
+    /* =========================
+       MÓVILES
+    ========================= */
 
     @media (max-width: 600px) {
-
-      main {
-        width:
-          calc(100% - 22px);
-
-        padding:
-          100px
-          0
-          65px;
+      .topbar {
+        width: calc(100% - 40px);
+        padding: 23px 0;
       }
 
-      .hero {
-        margin-bottom: 58px;
+      .brand {
+        font-size: 21px;
+      }
+
+      .topbar-label {
+        font-size: 7px;
+        letter-spacing: 0.12em;
+      }
+
+      main {
+        width: calc(100% - 38px);
+        padding: 90px 0 85px;
       }
 
       .eyebrow {
+        margin-bottom: 24px;
         font-size: 8px;
-        letter-spacing: .24em;
+        letter-spacing: 0.17em;
       }
 
-      .hero h1 {
-        font-size: 63px;
-      }
-
-      .lead {
-        max-width: 340px;
-
-        margin-top: 22px;
-
-        font-size: 10px;
-
-        line-height: 1.7;
+      h1 {
+        font-size: clamp(55px, 13vw, 76px);
       }
 
       .intro {
-        padding-bottom: 48px;
-      }
-
-      .intro h2 {
-        font-size: 43px;
-      }
-
-      .intro-copy {
-        margin-top: 21px;
-
-        font-size: 10px;
-
-        line-height: 1.75;
-      }
-
-      .affiliate-content {
-        padding:
-          45px
-          0;
-      }
-
-      .affiliate-grid {
-        grid-template-columns: 1fr;
-        gap: 38px;
-      }
-
-      .affiliate-block {
-        padding-top: 16px;
-      }
-
-      .affiliate-block h3 {
-        font-size: 22px;
-      }
-
-      .affiliate-block p {
-        font-size: 10px;
+        max-width: 340px;
+        margin-top: 25px;
+        font-size: 12px;
+        line-height: 1.85;
       }
 
       .statement {
-        padding:
-          45px
-          0
-          50px;
+        margin-top: 48px;
+        padding: 23px 5px;
       }
 
       .statement p {
-        font-size: 37px;
-        line-height: .96;
+        font-size: 30px;
       }
 
-      .cta-wrap {
-        padding-top: 38px;
+      .contact {
+        margin-top: 42px;
       }
 
-      .cta {
-        min-height: 52px;
+      .button {
+        min-height: 55px;
+        padding: 0 17px;
+        font-size: 10px;
+      }
 
-        padding:
-          0
-          16px;
+      footer {
+        width: calc(100% - 40px);
+        padding: 20px 0;
+      }
 
+      .footer-copy {
         font-size: 8px;
+        text-align: right;
       }
-
-      .note {
-        font-size: 7.5px;
-      }
-
-      .marquee-vesira {
-        padding:
-          24px
-          0;
-      }
-
-      .marquee-vesira-group {
-        gap: 45px;
-        padding-right: 45px;
-      }
-
-      .marquee-vesira-group img {
-        width: 115px;
-        height: 48px;
-      }
-
     }
 
-
-    /* =========================================================
-       MENOS ANIMACIÓN
-       ========================================================= */
+    /* =========================
+       ACCESIBILIDAD
+    ========================= */
 
     @media (prefers-reduced-motion: reduce) {
-
-      html {
-        scroll-behavior: auto;
-      }
-
       *,
       *::before,
       *::after {
-
-        animation-duration:
-          .01ms !important;
-
-        animation-iteration-count:
-          1 !important;
-
-        transition-duration:
-          .01ms !important;
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
       }
-
     }
-
   </style>
-
 </head>
-
 
 <body>
 
+  <div class="page">
 
-  <!-- ========================================================
-       NAVBAR
-       ======================================================== -->
+    <!-- CABECERA -->
 
-  <script src="vesira-navbar.js"></script>
+    <header class="topbar">
+      <a class="brand" href="https://www.instagram.com/vesira.co/">
+        VESIRA
+      </a>
 
+      <span class="topbar-label">
+        Programa de afiliados
+      </span>
+    </header>
 
-  <!-- ========================================================
-       CONTENIDO
-       ======================================================== -->
+    <!-- CONTENIDO -->
 
-  <main>
+    <main>
 
-
-    <!-- ======================================================
-         HERO
-         ====================================================== -->
-
-    <section class="hero">
-
-      <div class="eyebrow">
-        Programa de Afiliados Vesira
-      </div>
+      <p class="eyebrow">
+        Crecemos juntos
+      </p>
 
       <h1>
         Forma parte<br>
-        de Vesira.
+        <span>de Vesira.</span>
       </h1>
 
-      <p class="lead">
-        Consigue tu código personal
-        y gana una comisión por cada venta.
+      <p class="intro">
+        Únete a nuestro programa de afiliados,
+        <strong>gana una comisión por cada venta</strong>
+        que generes y pasa a formar parte de nuestra empresa.
       </p>
 
-    </section>
+      <section class="statement" aria-label="Nuestra propuesta">
+        <p>
+          Comparte Vesira.<br>
+          <span>Gana con cada venta.</span>
+        </p>
+      </section>
 
+      <!-- CONTACTO -->
 
-    <!-- ======================================================
-         INTRO
-         ====================================================== -->
+      <section class="contact" id="contacto">
 
-    <section class="intro">
+        <p class="contact-label">
+          ¿Te gustaría unirte?
+        </p>
 
-      <div class="section-label">
-        Afiliados Vesira
-      </div>
+        <div class="buttons">
 
-      <h2>
-        Comparte lo que te gusta.
-      </h2>
+          <a
+            class="button button-instagram"
+            id="instagramLink"
+            href="https://ig.me/m/vesira.co"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Escribir por Instagram</span>
+            <span class="button-icon" aria-hidden="true">↗</span>
+          </a>
 
-      <p class="intro-copy">
-        No necesitas ser creador de contenido
-        ni tener una gran audiencia.
-      </p>
-
-      <p class="intro-copy">
-        <strong>Cualquiera puede formar parte del programa.</strong>
-        Comparte Vesira con quien quieras y gana con tus ventas.
-      </p>
-
-    </section>
-
-
-    <!-- ======================================================
-         AFILIADOS
-         ====================================================== -->
-
-    <section class="affiliate-content">
-
-      <div class="affiliate-grid">
-
-
-        <div class="affiliate-block">
-
-          <h3>
-            Tu código.
-          </h3>
-
-          <p>
-            Recibe un código personal
-            para compartir Vesira.
-          </p>
+          <a
+            class="button button-whatsapp"
+            id="whatsappLink"
+            href="#contacto"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Escribir por WhatsApp</span>
+            <span class="button-icon" aria-hidden="true">↗</span>
+          </a>
 
         </div>
 
+        <p class="contact-note">
+          Escríbenos y nuestro equipo te responderá
+          para explicarte cómo formar parte de Vesira.
+        </p>
 
-        <div class="affiliate-block">
+        <p
+          class="feedback"
+          id="feedback"
+          role="status"
+          aria-live="polite"
+        ></p>
 
-          <h3>
-            Tu comisión.
-          </h3>
+      </section>
 
-          <p>
-            Ganas una comisión por cada compra
-            realizada con tu código.
-          </p>
+    </main>
 
-        </div>
+    <!-- PIE DE PÁGINA -->
 
+    <footer>
+      <span class="footer-brand">VESIRA</span>
+      <span class="footer-copy">
+        © <span id="year"></span> Vesira. Todos los derechos reservados.
+      </span>
+    </footer>
 
-        <div class="affiliate-block">
+  </div>
 
-          <h3>
-            A tu manera.
-          </h3>
+  <script>
+    /* =========================================
+       CONFIGURACIÓN
+    ========================================= */
 
-          <p>
-            Compártelo con amigos, familiares
-            o en tus redes. <strong>Tú decides cómo.</strong>
-          </p>
+    // IMPORTANTE:
+    // Sustituye este texto por el número de WhatsApp
+    // de tu empresa, con prefijo internacional.
+    // Ejemplo de formato: 34600111222
+    // No incluyas el signo +, espacios ni guiones.
 
-        </div>
+    const WHATSAPP_NUMBER = "TU_NUMERO_DE_WHATSAPP";
 
+    // Mensaje que recibiréis de los futuros afiliados.
 
-        <div class="affiliate-block">
-
-          <h3>
-            Forma parte.
-          </h3>
-
-          <p>
-            Conecta con Vesira
-            y crece junto a la marca.
-          </p>
-
-        </div>
-
-
-      </div>
-
-    </section>
+    const AFFILIATE_MESSAGE =
+      "Hola, equipo Vesira. Me gustaría formar parte del programa de afiliados. ¿Podéis contarme cómo empezar? ¡Gracias!";
 
 
-    <!-- ======================================================
-         STATEMENT
-         ====================================================== -->
+    /* =========================================
+       ENLACE DE WHATSAPP
+    ========================================= */
 
-    <section class="statement">
+    const whatsappLink = document.getElementById("whatsappLink");
+    const feedback = document.getElementById("feedback");
 
-      <p>
-        Comparte Vesira.
-        <span>
-          Gana con ella.
-        </span>
-      </p>
+    if (/^\d{7,15}$/.test(WHATSAPP_NUMBER)) {
 
-    </section>
+      whatsappLink.href =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        encodeURIComponent(AFFILIATE_MESSAGE);
 
+    } else {
 
-    <!-- ======================================================
-         CTA
-         ====================================================== -->
+      whatsappLink.addEventListener("click", function (event) {
+        event.preventDefault();
 
-    <section class="cta-wrap">
+        feedback.textContent =
+          "El enlace de WhatsApp todavía no está configurado.";
+      });
 
-      <div class="cta-label">
-        Programa de Afiliados
-      </div>
-
-      <a
-        class="cta"
-        href="https://www.instagram.com/vesira.co/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Escribir a Vesira por Instagram"
-      >
-
-        <span>
-          Quiero ser afiliado
-        </span>
-
-        <span
-          class="material-symbols-outlined"
-          aria-hidden="true"
-        >
-          arrow_outward
-        </span>
-
-      </a>
-
-      <div class="note">
-        Escríbenos al privado en @vesira.co y te haremos embajador de la marca
-      </div>
-
-    </section>
+    }
 
 
-  </main>
+    /* =========================================
+       INSTAGRAM
+    ========================================= */
+
+    const instagramLink = document.getElementById("instagramLink");
+
+    // Instagram no dispone de un método oficial documentado
+    // para rellenar automáticamente el texto del mensaje.
+    // Por eso copiamos el mensaje al portapapeles y abrimos
+    // la conversación para que el usuario pueda pegarlo.
+
+    function fallbackCopy(text) {
+      const textarea = document.createElement("textarea");
+
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      let copied = false;
+
+      try {
+        copied = document.execCommand("copy");
+      } catch (error) {
+        copied = false;
+      }
+
+      textarea.remove();
+
+      return copied;
+    }
+
+    instagramLink.addEventListener("click", async function () {
+
+      try {
+
+        await navigator.clipboard.writeText(AFFILIATE_MESSAGE);
+
+        feedback.textContent =
+          "Mensaje copiado. Pégalo en el chat de Instagram y envíalo.";
+
+      } catch (error) {
+
+        const copied = fallbackCopy(AFFILIATE_MESSAGE);
+
+        feedback.textContent = copied
+          ? "Mensaje copiado. Pégalo en Instagram y envíalo."
+          : "Recuerda escribirnos por Instagram para unirte al programa.";
+
+      }
+
+    });
 
 
-  <!-- ========================================================
-       MARQUEE
-       ======================================================== -->
+    /* =========================================
+       AÑO AUTOMÁTICO
+    ========================================= */
 
-  <section
-    class="marquee-vesira"
-    aria-hidden="true"
-  >
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
 
-    <div class="marquee-vesira-track">
-
-
-      <div class="marquee-vesira-group">
-
-        <img
-          src="img/logo2.png"
-          alt="Vesira"
-        >
-
-        <img
-          src="img/logo15.png"
-          alt=""
-        >
-
-        <img
-          src="img/logo2.png"
-          alt="Vesira"
-        >
-
-        <img
-          src="img/logo15.png"
-          alt=""
-        >
-
-        <img
-          src="img/logo2.png"
-          alt="Vesira"
-        >
-
-        <img
-          src="img/logo15.png"
-          alt=""
-        >
-
-      </div>
-
-
-      <div class="marquee-vesira-group">
-
-        <img
-          src="img/logo2.png"
-          alt="Vesira"
-        >
-
-        <img
-          src="img/logo15.png"
-          alt=""
-        >
-
-        <img
-          src="img/logo2.png"
-          alt="Vesira"
-        >
-
-        <img
-          src="img/logo15.png"
-          alt=""
-        >
-
-        <img
-          src="img/logo2.png"
-          alt="Vesira"
-        >
-
-        <img
-          src="img/logo15.png"
-          alt=""
-        >
-
-      </div>
-
-
-    </div>
-
-  </section>
-
+  </script>
 
 </body>
-
 </html>
